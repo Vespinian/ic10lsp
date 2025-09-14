@@ -1,7 +1,6 @@
-use std::{borrow::Cow, collections::HashMap, fmt::Display, net::Ipv4Addr, sync::Arc};
-
 use phf::phf_set;
 use serde_json::Value;
+use std::{borrow::Cow, collections::HashMap, fmt::Display, net::Ipv4Addr, sync::Arc};
 use tokio::{
     net::{TcpListener, TcpStream},
     sync::RwLock,
@@ -31,7 +30,7 @@ use tower_lsp::{
     },
     Client, LanguageServer, LspService, Server,
 };
-use tree_sitter::{Node, Parser, Query, QueryCursor, Tree};
+use tree_sitter::{Node, Parser, Query, QueryCursor, StreamingIterator, Tree};
 
 mod cli;
 mod instructions;
@@ -352,48 +351,50 @@ impl LanguageServer for Backend {
         };
 
         let mut cursor = QueryCursor::new();
-        let query = Query::new(tree_sitter_ic10::language(), "(number)@x").unwrap();
+        let query = Query::new(&tree_sitter_ic10::LANGUAGE.into(), "(number)@x").unwrap();
 
-        for (capture, _) in cursor.captures(&query, tree.root_node(), document.content.as_bytes()) {
-            let node = capture.captures[0].node;
+        cursor
+            .captures(&query, tree.root_node(), document.content.as_bytes())
+            .for_each(|(capture, _)| {
+                let node = capture.captures[0].node;
 
-            let range = Range::from(node.range());
-            if !range.contains(node.range().start_point.into())
-                || !range.contains(node.range().end_point.into())
-            {
-                continue;
-            }
-
-            let text = node.utf8_text(document.content.as_bytes()).unwrap();
-            if let Some(item_name) = instructions::HASH_NAME_LOOKUP.get(text) {
-                let Some(line_node) = node.find_parent("line") else {
-                    continue;
-                };
-
-                let endpos = if let Some(newline) =
-                    line_node.query("(newline)@x", document.content.as_bytes())
+                let range = Range::from(node.range());
+                if !range.contains(node.range().start_point.into())
+                    || !range.contains(node.range().end_point.into())
                 {
-                    Position::from(newline.range().start_point)
-                } else if let Some(instruction) =
-                    line_node.query("(instruction)@x", document.content.as_bytes())
-                {
-                    Position::from(instruction.range().end_point)
-                } else {
-                    Position::from(node.range().end_point)
-                };
+                    return;
+                }
 
-                ret.push(InlayHint {
-                    position: endpos.into(),
-                    label: InlayHintLabel::String(item_name.to_string()),
-                    kind: Some(InlayHintKind::TYPE),
-                    text_edits: None,
-                    tooltip: None,
-                    padding_left: None,
-                    padding_right: None,
-                    data: None,
-                });
-            }
-        }
+                let text = node.utf8_text(document.content.as_bytes()).unwrap();
+                if let Some(item_name) = instructions::HASH_NAME_LOOKUP.get(text) {
+                    let Some(line_node) = node.find_parent("line") else {
+                        return;
+                    };
+
+                    let endpos = if let Some(newline) =
+                        line_node.query("(newline)@x", document.content.as_bytes())
+                    {
+                        Position::from(newline.range().start_point)
+                    } else if let Some(instruction) =
+                        line_node.query("(instruction)@x", document.content.as_bytes())
+                    {
+                        Position::from(instruction.range().end_point)
+                    } else {
+                        Position::from(node.range().end_point)
+                    };
+
+                    ret.push(InlayHint {
+                        position: endpos.into(),
+                        label: InlayHintLabel::String(item_name.to_string()),
+                        kind: Some(InlayHintKind::TYPE),
+                        text_edits: None,
+                        tooltip: None,
+                        padding_left: None,
+                        padding_right: None,
+                        data: None,
+                    });
+                }
+            });
 
         Ok(Some(ret))
     }
@@ -416,7 +417,7 @@ impl LanguageServer for Backend {
 
         let mut cursor = QueryCursor::new();
         let query = Query::new(
-            tree_sitter_ic10::language(),
+            &tree_sitter_ic10::LANGUAGE.into(),
             "(comment) @comment
              (instruction (operation)@keyword)
              (logictype)@string
@@ -438,52 +439,54 @@ impl LanguageServer for Backend {
         let float_idx = query.capture_index_for_name("float").unwrap();
         let variable_idx = query.capture_index_for_name("variable").unwrap();
 
-        for (capture, _) in cursor.captures(&query, tree.root_node(), document.content.as_bytes()) {
-            let node = capture.captures[0].node;
-            let idx = capture.captures[0].index;
-            let start = node.range().start_point;
+        cursor
+            .captures(&query, tree.root_node(), document.content.as_bytes())
+            .for_each(|(capture, _)| {
+                let node = capture.captures[0].node;
+                let idx = capture.captures[0].index;
+                let start = node.range().start_point;
 
-            let delta_line = start.row as u32 - previous_line;
-            let delta_start = if delta_line == 0 {
-                start.column as u32 - previous_col
-            } else {
-                start.column as u32
-            };
-
-            let tokentype = {
-                if idx == comment_idx {
-                    SemanticTokenType::COMMENT
-                } else if idx == keyword_idx {
-                    SemanticTokenType::KEYWORD
-                } else if idx == string_idx {
-                    SemanticTokenType::STRING
-                } else if idx == preproc_idx {
-                    SemanticTokenType::FUNCTION
-                } else if idx == macro_idx {
-                    SemanticTokenType::MACRO
-                } else if idx == float_idx {
-                    SemanticTokenType::NUMBER
-                } else if idx == variable_idx {
-                    SemanticTokenType::VARIABLE
+                let delta_line = start.row as u32 - previous_line;
+                let delta_start = if delta_line == 0 {
+                    start.column as u32 - previous_col
                 } else {
-                    continue;
-                }
-            };
+                    start.column as u32
+                };
 
-            ret.push(SemanticToken {
-                delta_line,
-                delta_start,
-                length: node.range().end_point.column as u32 - start.column as u32,
-                token_type: SEMANTIC_SYMBOL_LEGEND
-                    .iter()
-                    .position(|x| *x == tokentype)
-                    .unwrap() as u32,
-                token_modifiers_bitset: 0,
+                let tokentype = {
+                    if idx == comment_idx {
+                        SemanticTokenType::COMMENT
+                    } else if idx == keyword_idx {
+                        SemanticTokenType::KEYWORD
+                    } else if idx == string_idx {
+                        SemanticTokenType::STRING
+                    } else if idx == preproc_idx {
+                        SemanticTokenType::FUNCTION
+                    } else if idx == macro_idx {
+                        SemanticTokenType::MACRO
+                    } else if idx == float_idx {
+                        SemanticTokenType::NUMBER
+                    } else if idx == variable_idx {
+                        SemanticTokenType::VARIABLE
+                    } else {
+                        return;
+                    }
+                };
+
+                ret.push(SemanticToken {
+                    delta_line,
+                    delta_start,
+                    length: node.range().end_point.column as u32 - start.column as u32,
+                    token_type: SEMANTIC_SYMBOL_LEGEND
+                        .iter()
+                        .position(|x| *x == tokentype)
+                        .unwrap() as u32,
+                    token_modifiers_bitset: 0,
+                });
+
+                previous_line = start.row as u32;
+                previous_col = start.column as u32;
             });
-
-            previous_line = start.row as u32;
-            previous_col = start.column as u32;
-        }
         Ok(Some(SemanticTokensResult::Tokens(SemanticTokens {
             result_id: None,
             data: ret,
@@ -510,7 +513,7 @@ impl LanguageServer for Backend {
 
         let mut cursor = QueryCursor::new();
         let query = Query::new(
-            tree_sitter_ic10::language(),
+            &tree_sitter_ic10::LANGUAGE.into(),
             "(instruction (operation \"define\") . (operand)@name)@define
             (instruction (operation \"alias\") . (operand)@name)@alias
             (instruction (operation \"label\") . (operand)@name)@alias
@@ -524,7 +527,7 @@ impl LanguageServer for Backend {
 
         let matches = cursor.matches(&query, tree.root_node(), document.content.as_bytes());
 
-        for matched in matches {
+        matches.for_each(|matched| {
             let main_match = {
                 let mut ret = None;
                 for cap in matched.captures {
@@ -534,7 +537,7 @@ impl LanguageServer for Backend {
                 }
                 match ret {
                     Some(ret) => ret,
-                    None => continue,
+                    None => return,
                 }
             };
 
@@ -549,7 +552,7 @@ impl LanguageServer for Backend {
             };
 
             let Some(name_node) = matched.nodes_for_capture_index(name_idx).next() else {
-                continue;
+                return;
             };
 
             let name = name_node.utf8_text(document.content.as_bytes()).unwrap();
@@ -562,7 +565,7 @@ impl LanguageServer for Backend {
                 location: Location::new(uri.clone(), Range::from(name_node.range()).into()),
                 container_name: None,
             });
-        }
+        });
         Ok(Some(DocumentSymbolResponse::Flat(ret)))
     }
 
@@ -708,7 +711,10 @@ impl LanguageServer for Backend {
                     return Ok(None);
                 };
 
-                let Some(instruction_node) = line_node.query("(instruction)@x", file_data.document_data.content.as_bytes()) else {
+                let Some(instruction_node) = line_node.query(
+                    "(instruction)@x",
+                    file_data.document_data.content.as_bytes(),
+                ) else {
                     return Ok(None);
                 };
 
@@ -859,7 +865,9 @@ impl LanguageServer for Backend {
             return Ok(None);
         };
 
-        let Some(instruction_node) = line_node.query("(instruction)@x", document.content.as_bytes()) else {
+        let Some(instruction_node) =
+            line_node.query("(instruction)@x", document.content.as_bytes())
+        else {
             return Ok(None);
         };
 
@@ -935,9 +943,13 @@ impl LanguageServer for Backend {
         };
 
         'diagnostics: for diagnostic in params.context.diagnostics {
-            let Some(line_node) = node.find_parent("line") else { continue 'diagnostics; };
+            let Some(line_node) = node.find_parent("line") else {
+                continue 'diagnostics;
+            };
 
-            let Some(NumberOrString::String(code)) = diagnostic.code.clone() else {continue;};
+            let Some(NumberOrString::String(code)) = diagnostic.code.clone() else {
+                continue;
+            };
             match code.as_str() {
                 LINT_NUMBER_BATCH_MODE => {
                     let replacement = diagnostic.data.as_ref().unwrap().as_str().unwrap();
@@ -1020,7 +1032,8 @@ impl LanguageServer for Backend {
         params: GotoDefinitionParams,
     ) -> Result<Option<GotoDefinitionResponse>> {
         let files = self.files.read().await;
-        let Some(file_data) = files.get(&params.text_document_position_params.text_document.uri) else {
+        let Some(file_data) = files.get(&params.text_document_position_params.text_document.uri)
+        else {
             return Err(tower_lsp::jsonrpc::Error::internal_error());
         };
         let document = &file_data.document_data;
@@ -1046,7 +1059,8 @@ impl LanguageServer for Backend {
 
     async fn hover(&self, params: HoverParams) -> Result<Option<Hover>> {
         let files = self.files.read().await;
-        let Some(file_data) = files.get(&params.text_document_position_params.text_document.uri) else {
+        let Some(file_data) = files.get(&params.text_document_position_params.text_document.uri)
+        else {
             return Err(tower_lsp::jsonrpc::Error::internal_error());
         };
         let document = &file_data.document_data;
@@ -1101,7 +1115,7 @@ impl LanguageServer for Backend {
                 }
             }
             "operation" => {
-                let Some(signature) =  instructions::INSTRUCTIONS.get(name) else {
+                let Some(signature) = instructions::INSTRUCTIONS.get(name) else {
                     return Ok(None);
                 };
                 let mut content = name.to_string();
@@ -1176,14 +1190,14 @@ impl LanguageServer for Backend {
 }
 
 impl Backend {
-    fn node_at_position<'a>(&'a self, position: Position, tree: &'a Tree) -> Option<Node> {
+    fn node_at_position<'a>(&'a self, position: Position, tree: &'a Tree) -> Option<Node<'a>> {
         self.node_at_range(
             tower_lsp::lsp_types::Range::new(position.into(), position.into()).into(),
             tree,
         )
     }
 
-    fn node_at_range<'a>(&'a self, range: Range, tree: &'a Tree) -> Option<Node> {
+    fn node_at_range<'a>(&'a self, range: Range, tree: &'a Tree) -> Option<Node<'a>> {
         let root = tree.root_node();
         let start = Position::from(range.0.start);
         let end = Position::from(range.0.end);
@@ -1202,7 +1216,7 @@ impl Backend {
             std::collections::hash_map::Entry::Vacant(entry) => {
                 let mut parser = Parser::new();
                 parser
-                    .set_language(tree_sitter_ic10::language())
+                    .set_language(&tree_sitter_ic10::LANGUAGE.into())
                     .expect("Could not set language");
                 let key = entry.key().clone();
                 entry.insert(FileData {
@@ -1216,7 +1230,7 @@ impl Backend {
                 });
             }
             std::collections::hash_map::Entry::Occupied(mut entry) => {
-                let mut entry = entry.get_mut();
+                let entry = entry.get_mut();
                 entry.document_data.tree = entry.document_data.parser.parse(&text, None); // TODO
                 entry.document_data.content = text;
             }
@@ -1238,7 +1252,7 @@ impl Backend {
 
             let mut cursor = QueryCursor::new();
             let query = Query::new(
-                tree_sitter_ic10::language(),
+                &tree_sitter_ic10::LANGUAGE.into(),
                 "(instruction (operation \"define\"))@define
                          (instruction (operation \"alias\"))@alias
                          (instruction (operation \"label\"))@alias
@@ -1252,7 +1266,7 @@ impl Backend {
 
             let captures = cursor.captures(&query, tree.root_node(), document.content.as_bytes());
 
-            for (capture, _) in captures {
+            captures.for_each(|(capture, _)| {
                 let capture_idx = capture.captures[0].index;
                 if capture_idx == define_idx || capture_idx == alias_idx {
                     if let Some(name_node) = capture.captures[0].node.child_by_field_name("operand")
@@ -1283,7 +1297,7 @@ impl Backend {
                                 }]),
                                 None,
                             ));
-                            continue;
+                            return;
                         } else {
                             let mut cursor = capture.captures[0].node.walk();
                             let value_node = capture.captures[0]
@@ -1300,7 +1314,7 @@ impl Backend {
                                         .map(|x| x.kind())
                                         .map_or(false, |x| x != "number")
                                     {
-                                        continue;
+                                        return;
                                     }
                                     type_data.defines.insert(
                                         name.to_owned(),
@@ -1315,7 +1329,7 @@ impl Backend {
                                         .map(|x| x.kind())
                                         .map_or(false, |x| x != "register" && x != "device_spec")
                                     {
-                                        continue;
+                                        return;
                                     }
                                     type_data.aliases.insert(
                                         name.to_owned(),
@@ -1344,7 +1358,7 @@ impl Backend {
                             }]),
                             None,
                         ));
-                        continue;
+                        return;
                     }
                     type_data.labels.insert(
                         name.to_owned(),
@@ -1355,7 +1369,7 @@ impl Backend {
                     );
                 }
                 //println!("{:#?}", capture);
-            }
+            });
             // println!("{:#?}", type_data.defines);
             // println!("{:#?}", type_data.aliases);
             // println!("{:#?}", type_data.labels);
@@ -1375,11 +1389,11 @@ impl Backend {
         };
 
         let mut cursor = QueryCursor::new();
-        let query = Query::new(tree_sitter_ic10::language(), "(instruction)@a").unwrap();
+        let query = Query::new(&tree_sitter_ic10::LANGUAGE.into(), "(instruction)@a").unwrap();
 
         let captures = cursor.captures(&query, tree.root_node(), document.content.as_bytes());
 
-        for (capture, _) in captures {
+        captures.for_each(|(capture, _)| {
             let capture = capture.captures[0].node;
 
             if let Some(operation_node) = capture.child_by_field_name("operation") {
@@ -1387,19 +1401,19 @@ impl Backend {
                     .utf8_text(document.content.as_bytes())
                     .unwrap();
                 let Some(signature) = instructions::INSTRUCTIONS.get(operation) else {
-                                if operation != "define" && operation != "alias" && operation != "label" {
-                                    diagnostics.push(Diagnostic::new(
-                                            Range::from(operation_node.range()).into(),
-                                            Some(DiagnosticSeverity::INFORMATION),
-                                            None,
-                                            None,
-                                            format!("Unsupported instruction"),
-                                            None,
-                                            None,
-                                            ));
-                                }
-                                continue;
-                            };
+                    if operation != "define" && operation != "alias" && operation != "label" {
+                        diagnostics.push(Diagnostic::new(
+                            Range::from(operation_node.range()).into(),
+                            Some(DiagnosticSeverity::INFORMATION),
+                            None,
+                            None,
+                            format!("Unsupported instruction"),
+                            None,
+                            None,
+                        ));
+                    }
+                    return;
+                };
 
                 let mut argument_count = 0;
                 let mut tree_cursor = capture.walk();
@@ -1412,11 +1426,11 @@ impl Backend {
                     use instructions::DataType;
                     argument_count = argument_count + 1;
                     let Some(parameter) = parameters.next() else {
-                                        if first_superfluous_arg.is_none() {
-                                            first_superfluous_arg = Some(operand);
-                                        }
-                                        continue;
-                                    };
+                        if first_superfluous_arg.is_none() {
+                            first_superfluous_arg = Some(operand);
+                        }
+                        continue;
+                    };
 
                     let mut types = Vec::new();
                     let typ = match operand.named_child(0).unwrap().kind() {
@@ -1520,7 +1534,7 @@ impl Backend {
                         None,
                         None,
                     ));
-                    continue;
+                    return;
                 }
                 if argument_count != signature.0.len() {
                     diagnostics.push(Diagnostic::new(
@@ -1534,7 +1548,7 @@ impl Backend {
                     ));
                 }
             }
-        }
+        });
     }
 
     async fn run_diagnostics(&self, uri: &Url) {
@@ -1545,7 +1559,9 @@ impl Backend {
 
         let config = self.config.read().await;
         let files = self.files.read().await;
-        let Some(file_data) = files.get(uri) else {return;};
+        let Some(file_data) = files.get(uri) else {
+            return;
+        };
 
         let document = &file_data.document_data;
         let Some(tree) = document.tree.as_ref() else {
@@ -1555,9 +1571,9 @@ impl Backend {
         // Syntax errors
         {
             let mut cursor = QueryCursor::new();
-            let query = Query::new(tree_sitter_ic10::language(), "(ERROR)@error").unwrap();
+            let query = Query::new(&tree_sitter_ic10::LANGUAGE.into(), "(ERROR)@error").unwrap();
             let captures = cursor.captures(&query, tree.root_node(), document.content.as_bytes());
-            for (capture, _) in captures {
+            captures.for_each(|(capture, _)| {
                 diagnostics.push(Diagnostic::new(
                     Range::from(capture.captures[0].node.range()).into(),
                     Some(DiagnosticSeverity::ERROR),
@@ -1567,19 +1583,19 @@ impl Backend {
                     None,
                     None,
                 ));
-            }
+            });
         }
 
         // Find invalid instructions
         {
             let mut cursor = QueryCursor::new();
             let query = Query::new(
-                tree_sitter_ic10::language(),
+                &tree_sitter_ic10::LANGUAGE.into(),
                 "(instruction (invalid_instruction)@error)",
             )
             .unwrap();
             let captures = cursor.captures(&query, tree.root_node(), document.content.as_bytes());
-            for (capture, _) in captures {
+            captures.for_each(|(capture, _)| {
                 diagnostics.push(Diagnostic::new(
                     Range::from(capture.captures[0].node.range()).into(),
                     Some(DiagnosticSeverity::ERROR),
@@ -1589,7 +1605,7 @@ impl Backend {
                     None,
                     None,
                 ));
-            }
+            });
         }
 
         // Type check
@@ -1599,32 +1615,10 @@ impl Backend {
         {
             let mut cursor = QueryCursor::new();
 
-            let query = Query::new(tree_sitter_ic10::language(), "(instruction)@x").unwrap();
-            for (capture, _) in
-                cursor.captures(&query, tree.root_node(), document.content.as_bytes())
-            {
-                let node = capture.captures[0].node;
-                if node.end_position().column > config.max_columns {
-                    diagnostics.push(Diagnostic {
-                        range: LspRange::new(
-                            LspPosition::new(
-                                node.end_position().row as u32,
-                                config.max_columns as u32,
-                            ),
-                            Position::from(node.end_position()).into(),
-                        ),
-                        severity: Some(DiagnosticSeverity::ERROR),
-                        message: format!("Instruction past column {}", config.max_columns),
-                        ..Default::default()
-                    });
-                }
-            }
-
-            if config.warn_overcolumn_comment {
-                let query = Query::new(tree_sitter_ic10::language(), "(comment)@x").unwrap();
-                for (capture, _) in
-                    cursor.captures(&query, tree.root_node(), document.content.as_bytes())
-                {
+            let query = Query::new(&tree_sitter_ic10::LANGUAGE.into(), "(instruction)@x").unwrap();
+            cursor
+                .captures(&query, tree.root_node(), document.content.as_bytes())
+                .for_each(|(capture, _)| {
                     let node = capture.captures[0].node;
                     if node.end_position().column > config.max_columns {
                         diagnostics.push(Diagnostic {
@@ -1635,45 +1629,67 @@ impl Backend {
                                 ),
                                 Position::from(node.end_position()).into(),
                             ),
-                            severity: Some(DiagnosticSeverity::WARNING),
-                            message: format!("Comment past column {}", config.max_columns),
+                            severity: Some(DiagnosticSeverity::ERROR),
+                            message: format!("Instruction past column {}", config.max_columns),
                             ..Default::default()
                         });
                     }
-                }
+                });
+
+            if config.warn_overcolumn_comment {
+                let query = Query::new(&tree_sitter_ic10::LANGUAGE.into(), "(comment)@x").unwrap();
+                cursor
+                    .captures(&query, tree.root_node(), document.content.as_bytes())
+                    .for_each(|(capture, _)| {
+                        let node = capture.captures[0].node;
+                        if node.end_position().column > config.max_columns {
+                            diagnostics.push(Diagnostic {
+                                range: LspRange::new(
+                                    LspPosition::new(
+                                        node.end_position().row as u32,
+                                        config.max_columns as u32,
+                                    ),
+                                    Position::from(node.end_position()).into(),
+                                ),
+                                severity: Some(DiagnosticSeverity::WARNING),
+                                message: format!("Comment past column {}", config.max_columns),
+                                ..Default::default()
+                            });
+                        }
+                    });
             }
 
             cursor.set_point_range(
                 tree_sitter::Point::new(config.max_lines, 0)
                     ..tree_sitter::Point::new(usize::MAX, usize::MAX),
             );
-            let query = Query::new(tree_sitter_ic10::language(), "(instruction)@x").unwrap();
+            let query = Query::new(&tree_sitter_ic10::LANGUAGE.into(), "(instruction)@x").unwrap();
 
-            for (capture, _) in
-                cursor.captures(&query, tree.root_node(), document.content.as_bytes())
-            {
-                let node = capture.captures[0].node;
-                diagnostics.push(Diagnostic {
-                    range: Range::from(node.range()).into(),
-                    severity: Some(DiagnosticSeverity::ERROR),
-                    message: format!("Instruction past line {}", config.max_lines),
-                    ..Default::default()
-                });
-            }
-
-            if config.warn_overline_comment {
-                let query = Query::new(tree_sitter_ic10::language(), "(comment)@x").unwrap();
-                for (capture, _) in
-                    cursor.captures(&query, tree.root_node(), document.content.as_bytes())
-                {
+            cursor
+                .captures(&query, tree.root_node(), document.content.as_bytes())
+                .for_each(|(capture, _)| {
                     let node = capture.captures[0].node;
                     diagnostics.push(Diagnostic {
                         range: Range::from(node.range()).into(),
-                        severity: Some(DiagnosticSeverity::WARNING),
-                        message: format!("Comment past line {}", config.max_lines),
+                        severity: Some(DiagnosticSeverity::ERROR),
+                        message: format!("Instruction past line {}", config.max_lines),
                         ..Default::default()
                     });
-                }
+                });
+
+            if config.warn_overline_comment {
+                let query = Query::new(&tree_sitter_ic10::LANGUAGE.into(), "(comment)@x").unwrap();
+                cursor
+                    .captures(&query, tree.root_node(), document.content.as_bytes())
+                    .for_each(|(capture, _)| {
+                        let node = capture.captures[0].node;
+                        diagnostics.push(Diagnostic {
+                            range: Range::from(node.range()).into(),
+                            severity: Some(DiagnosticSeverity::WARNING),
+                            message: format!("Comment past line {}", config.max_lines),
+                            ..Default::default()
+                        });
+                    });
             }
         }
 
@@ -1687,27 +1703,31 @@ impl Backend {
             );
             let mut cursor = QueryCursor::new();
             let query = Query::new(
-                tree_sitter_ic10::language(),
+                &tree_sitter_ic10::LANGUAGE.into(),
                 "(instruction operand: (operand (number))) @x",
             )
             .unwrap();
             let mut tree_cursor = tree.walk();
             let captures = cursor.captures(&query, tree.root_node(), document.content.as_bytes());
-            for (capture, _) in captures {
+            captures.for_each(|(capture, _)| {
                 let capture = capture.captures[0].node;
                 let Some(operation_node) = capture.child_by_field_name("operation") else {
-                    continue;
+                    return;
                 };
                 let operation = operation_node
                     .utf8_text(document.content.as_bytes())
                     .unwrap();
                 if !BRANCH_INSTRUCTIONS.contains(operation) {
-                    continue;
+                    return;
                 }
 
                 tree_cursor.reset(capture);
-                let Some(last_operand) = capture.children_by_field_name("operand", &mut tree_cursor).into_iter().last() else {
-                    continue;
+                let Some(last_operand) = capture
+                    .children_by_field_name("operand", &mut tree_cursor)
+                    .into_iter()
+                    .last()
+                else {
+                    return;
                 };
                 let last_operand = last_operand.child(0).unwrap();
 
@@ -1722,28 +1742,28 @@ impl Backend {
                         None,
                     ));
                 }
-            }
+            });
         }
 
         // Number batch mode
         {
             let mut cursor = QueryCursor::new();
             let query = Query::new(
-                tree_sitter_ic10::language(),
+                &tree_sitter_ic10::LANGUAGE.into(),
                 "(instruction (operation)@op (operand (number)@n) .)",
             )
             .unwrap();
 
             let matches = cursor.matches(&query, tree.root_node(), document.content.as_bytes());
 
-            for query_match in matches {
+            matches.for_each(|query_match| {
                 {
                     let operation_node = query_match.captures[0].node;
                     let operation_text = operation_node
                         .utf8_text(document.content.as_bytes())
                         .unwrap();
                     if !operation_text.starts_with("lb") {
-                        continue;
+                        return;
                     }
                 }
                 let node = query_match.captures[1].node;
@@ -1751,14 +1771,15 @@ impl Backend {
                 let Ok(value) = node
                     .utf8_text(document.content.as_bytes())
                     .unwrap()
-                    .parse::<u8>() else {
+                    .parse::<u8>()
+                else {
                     diagnostics.push(Diagnostic {
                         range: Range::from(node.range()).into(),
                         severity: Some(DiagnosticSeverity::ERROR),
                         message: "Use of non-integer batch mode".to_string(),
                         ..Default::default()
                     });
-                    continue;
+                    return;
                 };
 
                 let Some(replacement) = instructions::BATCH_MODE_LOOKUP.get(&value) else {
@@ -1768,7 +1789,7 @@ impl Backend {
                         message: "Invalid batch mode".to_string(),
                         ..Default::default()
                     });
-                    continue;
+                    return;
                 };
 
                 diagnostics.push(Diagnostic {
@@ -1779,34 +1800,35 @@ impl Backend {
                     data: Some(Value::String(replacement.to_string())),
                     ..Default::default()
                 });
-            }
+            });
         }
 
         // Number reagent mode
         {
             let mut cursor = QueryCursor::new();
             let query = Query::new(
-                tree_sitter_ic10::language(),
+                &tree_sitter_ic10::LANGUAGE.into(),
                 "(instruction (operation \"lr\") . (operand) . (operand) . (operand (number)@n))",
             )
             .unwrap();
 
             let captures = cursor.captures(&query, tree.root_node(), document.content.as_bytes());
 
-            for (capture, _) in captures {
+            captures.for_each(|(capture, _)| {
                 let node = capture.captures[0].node;
 
                 let Ok(value) = node
                     .utf8_text(document.content.as_bytes())
                     .unwrap()
-                    .parse::<u8>() else {
+                    .parse::<u8>()
+                else {
                     diagnostics.push(Diagnostic {
                         range: Range::from(node.range()).into(),
                         severity: Some(DiagnosticSeverity::ERROR),
                         message: "Use of non-integer reagent mode".to_string(),
                         ..Default::default()
                     });
-                    continue;
+                    return;
                 };
 
                 let Some(replacement) = instructions::REAGENT_MODE_LOOKUP.get(&value) else {
@@ -1816,7 +1838,7 @@ impl Backend {
                         message: "Invalid reagent mode".to_string(),
                         ..Default::default()
                     });
-                    continue;
+                    return;
                 };
 
                 diagnostics.push(Diagnostic {
@@ -1827,7 +1849,7 @@ impl Backend {
                     data: Some(Value::String(replacement.to_string())),
                     ..Default::default()
                 });
-            }
+            });
         }
 
         self.client
@@ -1870,7 +1892,8 @@ impl<'a> NodeEx for Node<'a> {
 
     fn query(&self, query: &str, content: impl AsRef<[u8]>) -> Option<Node<'a>> {
         let mut cursor = QueryCursor::new();
-        let query = Query::new(tree_sitter_ic10::language(), query).unwrap();
+        let language = tree_sitter_ic10::LANGUAGE;
+        let query = Query::new(&language.into(), query).unwrap();
 
         let mut captures = cursor.captures(&query, self.clone(), content.as_ref());
         captures
@@ -1887,9 +1910,10 @@ async fn main() {
     let cli = cli::Cli::parse();
 
     let mut parser = Parser::new();
+    let language = tree_sitter_ic10::LANGUAGE;
     parser
-        .set_language(tree_sitter_ic10::language())
-        .expect("Failed to set language");
+        .set_language(&language.into())
+        .expect("Unable to add language");
 
     let (service, socket) = LspService::new(|client| Backend {
         client,
