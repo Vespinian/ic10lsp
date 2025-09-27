@@ -416,28 +416,18 @@ impl LanguageServer for Backend {
         };
 
         let mut cursor = QueryCursor::new();
-        let query = Query::new(
-            &tree_sitter_ic10::LANGUAGE.into(),
-            "(comment) @comment
-             (instruction (operation)@keyword)
-             (logictype)@string
-             (device)@preproc
-             (register)@macro
-             (number)@float
-             (identifier)@variable",
-        )
-        .unwrap();
+        let query = Query::new(&tree_sitter_ic10::LANGUAGE.into(), "").unwrap();
 
         let mut previous_line = 0u32;
         let mut previous_col = 0u32;
 
-        let comment_idx = query.capture_index_for_name("comment").unwrap();
-        let keyword_idx = query.capture_index_for_name("keyword").unwrap();
-        let string_idx = query.capture_index_for_name("string").unwrap();
-        let preproc_idx = query.capture_index_for_name("preproc").unwrap();
-        let macro_idx = query.capture_index_for_name("macro").unwrap();
-        let float_idx = query.capture_index_for_name("float").unwrap();
-        let variable_idx = query.capture_index_for_name("variable").unwrap();
+        let comment_idx = query.capture_index_for_name("comment");
+        let keyword_idx = query.capture_index_for_name("keyword");
+        let string_idx = query.capture_index_for_name("string");
+        let preproc_idx = query.capture_index_for_name("preproc");
+        let macro_idx = query.capture_index_for_name("macro");
+        let float_idx = query.capture_index_for_name("float");
+        let variable_idx = query.capture_index_for_name("variable");
 
         cursor
             .captures(&query, tree.root_node(), document.content.as_bytes())
@@ -454,19 +444,19 @@ impl LanguageServer for Backend {
                 };
 
                 let tokentype = {
-                    if idx == comment_idx {
+                    if Some(idx) == comment_idx {
                         SemanticTokenType::COMMENT
-                    } else if idx == keyword_idx {
+                    } else if Some(idx) == keyword_idx {
                         SemanticTokenType::KEYWORD
-                    } else if idx == string_idx {
+                    } else if Some(idx) == string_idx {
                         SemanticTokenType::STRING
-                    } else if idx == preproc_idx {
+                    } else if Some(idx) == preproc_idx {
                         SemanticTokenType::FUNCTION
-                    } else if idx == macro_idx {
+                    } else if Some(idx) == macro_idx {
                         SemanticTokenType::MACRO
-                    } else if idx == float_idx {
+                    } else if Some(idx) == float_idx {
                         SemanticTokenType::NUMBER
-                    } else if idx == variable_idx {
+                    } else if Some(idx) == variable_idx {
                         SemanticTokenType::VARIABLE
                     } else {
                         return;
