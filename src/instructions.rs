@@ -38,11 +38,15 @@ pub(crate) const INSTRUCTIONS: phf::Map<&'static str, InstructionSignature> = ph
     "bdseal" => InstructionSignature(&[DEVICE,VALUE]),
     "brdns" => InstructionSignature(&[DEVICE,VALUE]),
     "brdse" => InstructionSignature(&[DEVICE,VALUE]),
-    "l" => InstructionSignature(&[REGISTER,Union(&[DataType::Number, DataType::Device]),LOGIC_TYPE]),
+    "get" => InstructionSignature(&[REGISTER,Union(&[DataType::Register, DataType::Number, DataType::Device]),VALUE]),
+    "l" => InstructionSignature(&[REGISTER,Union(&[DataType::Register, DataType::Number, DataType::Device]),LOGIC_TYPE]),
+    "ld" => InstructionSignature(&[VALUE,VALUE,LOGIC_TYPE]),
     "lb" => InstructionSignature(&[REGISTER,VALUE,LOGIC_TYPE,BATCH_MODE]),
     "lr" => InstructionSignature(&[REGISTER,DEVICE,REAGENT_MODE,VALUE]),
-    "ls" => InstructionSignature(&[REGISTER,DEVICE,VALUE,SLOT_LOGIC_TYPE]),
-    "s" => InstructionSignature(&[Union(&[DataType::Number, DataType::Device]),LOGIC_TYPE,VALUE]),
+    "ls" => InstructionSignature(&[REGISTER,Union(&[DataType::Register, DataType::Number, DataType::Device]),VALUE,SLOT_LOGIC_TYPE]),
+    "put" => InstructionSignature(&[Union(&[DataType::Register, DataType::Number, DataType::Device]),VALUE,VALUE]),
+    "s" => InstructionSignature(&[Union(&[DataType::Register, DataType::Number, DataType::Device]),LOGIC_TYPE,VALUE]),
+    "sd" => InstructionSignature(&[VALUE,LOGIC_TYPE,VALUE]),
     "sb" => InstructionSignature(&[VALUE,LOGIC_TYPE,VALUE]),
     "lerp" => InstructionSignature(&[VALUE,VALUE,VALUE,VALUE]),
     "bap" => InstructionSignature(&[VALUE,VALUE,VALUE,VALUE]),
@@ -167,6 +171,8 @@ pub(crate) const INSTRUCTIONS: phf::Map<&'static str, InstructionSignature> = ph
 };
 
 pub(crate) const LOGIC_TYPES: phf::Set<&'static str> = phf_set! {
+    "Altitude",
+    "BestContactFilter",
     "Power",
     "Open",
     "Mode",
@@ -484,8 +490,12 @@ pub(crate) fn logictype_candidates(text: &str) -> Vec<DataType> {
 // with slight changes
 pub(crate) const INSTRUCTION_DOCS: phf::Map<&'static str, &'static str> = phf_map! {
     "l" => "Loads device var to register.",
+    "ld" => "Loads device id var to register",
+    "get" => "Gets value from device stack at address",
     "lb" => "Loads var from all output network devices with provided type hash using the provide batch mode. Average (0), Sum (1), Minimum (2), Maximum (3). Can use either the word, or the number.",
     "s" => "Stores register value to var on device.",
+    "sd" => "Stores register value to var on device id.",
+    "put" => "Puts value to device stack at address",
     "sb" => "Stores register value to var on all output network devices with provided type hash.",
     "ls" => "Loads slot var on device to register.",
     "lr" => "Loads reagent of device's reagentMode to register. Contents (0), Required (1), Recipe (2). Can use either the word, or the number.",
@@ -606,6 +616,8 @@ pub(crate) const INSTRUCTION_DOCS: phf::Map<&'static str, &'static str> = phf_ma
 };
 
 pub(crate) const LOGIC_TYPE_DOCS: phf::Map<&'static str, &'static str> = phf_map! {
+    "Altitude" => "The altitude that the rocket above the planet's surface. -1 if the rocket is in space.",
+    "BestContactFilter" => "Filters the satellite's auto selection of targets to a single reference ID.",
     "Power" => "Can be read to return if the device is correctly powered or not, set via the power system, return 1 if powered and 0 if not",
     "Open" => "1 if device is open, otherwise 0",
     "Mode" => "Integer for mode state, different devices will have different mode states available to them",
