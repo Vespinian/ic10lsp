@@ -1424,9 +1424,9 @@ impl Backend {
 
                     let mut types = Vec::new();
                     let typ = match operand.named_child(0).unwrap().kind() {
-                        "register" => instructions::Union(&[DataType::Register]),
-                        "device_spec" => instructions::Union(&[DataType::Device]),
-                        "number" => instructions::Union(&[DataType::Number]),
+                        "register" => instructions::Union(&[DataType::Register], ""),
+                        "device_spec" => instructions::Union(&[DataType::Device], ""),
+                        "number" => instructions::Union(&[DataType::Number, DataType::Id], ""),
                         "logictype" => {
                             let ident = operand
                                 .named_child(0)
@@ -1446,7 +1446,7 @@ impl Backend {
                             if instructions::REAGENT_MODES.contains(ident) {
                                 types.push(DataType::ReagentMode);
                             }
-                            instructions::Union(types.as_slice())
+                            instructions::Union(types.as_slice(), "")
                         }
                         "identifier" => {
                             let ident = operand
@@ -1455,18 +1455,20 @@ impl Backend {
                                 .utf8_text(document.content.as_bytes())
                                 .unwrap();
                             if parameter.match_type(DataType::Name) {
-                                instructions::Union(&[DataType::Name])
-                            } else if type_data.defines.contains_key(ident)
-                                || type_data.labels.contains_key(ident)
-                            {
-                                instructions::Union(&[DataType::Number])
+                                instructions::Union(&[DataType::Name], "")
+                            } else if type_data.defines.contains_key(ident) {
+                                instructions::Union(&[DataType::Number], "")
+                                // if rocketworks fixes the define bug with ids switch to this line
+                                // instructions::Union(&[DataType::Number, DataType::Id], "")
+                            } else if type_data.labels.contains_key(ident) {
+                                instructions::Union(&[DataType::Number], "")
                             } else if let Some(type_data) = type_data.aliases.get(ident) {
                                 match type_data.value {
                                     AliasValue::Device(_) => {
-                                        instructions::Union(&[DataType::Device])
+                                        instructions::Union(&[DataType::Device], "")
                                     }
                                     AliasValue::Register(_) => {
-                                        instructions::Union(&[DataType::Register])
+                                        instructions::Union(&[DataType::Register], "")
                                     }
                                 }
                             } else {

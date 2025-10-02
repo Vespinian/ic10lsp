@@ -4558,7 +4558,7 @@
     },
     "lr": {
       "desc": "Loads reagent of device's ReagentMode where a hash of the reagent type to check for. ReagentMode can be either Contents (0), Required (1), Recipe (2). Can use either the word, or the number.",
-      "example": "lr r? device(d?|r?|id) reagentMode int"
+      "example": "lr r? device(d?|r?|id) reagentMode"
     },
     "sb": {
       "desc": "Stores register value to LogicType on all output network devices with provided type hash.",
