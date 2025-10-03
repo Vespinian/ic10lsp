@@ -738,7 +738,8 @@ pub(crate) const INSTRUCTION_DOCS: phf::Map<&'static str, &'static str> = phf_ma
     "get" => "Using the provided device, attempts to read the stack value at the provided address, and places it in the register.",
     "getd" => "Seeks directly for the provided device id, attempts to read the stack value at the provided address, and places it in the register.",
     "hcf" => "Halt and catch fire",
-    "ins" => "Inserts a bit field of a into the provided register, beginning at b for c length. Payload cannot exceed 53 bits in final length.",
+    //TODO: might need to change when rocketwerks fixes either the description or the instruction
+    "ins" => "Inserts a bit field of c into the provided register, beginning at a for b length. Payload cannot exceed 53 bits in final length.",
     "j" => "Jump execution to line a",
     "jal" => "Jump execution to line a and store next line number in ra",
     "jr" => "Relative jump to line a",
