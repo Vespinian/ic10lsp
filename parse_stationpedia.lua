@@ -83,6 +83,33 @@ for index, value in pairs(json.scriptCommands) do
 			if v == "r?" then
 				-- print("REGISTER")
 				signature = signature .. "REGISTER"
+			elseif v == "str" then
+				-- print("NAME")
+				signature = signature .. "NAME"
+			elseif v == "num" then
+				-- print("NUMBER")
+				signature = signature .. "NUMBER"
+			elseif v == "int" then
+				-- print("INT")
+				signature = signature .. "INT"
+			elseif v == "d?" then
+				-- print("DEVICE_IDENTIFIER")
+				signature = signature .. "DEVICE_IDENTIFIER"
+			elseif v == "batchMode" then
+				-- print("BATCH_MODE")
+				signature = signature .. "BATCH_MODE"
+			elseif v == "nameHash" then
+				-- print("NAME_HASH")
+				signature = signature .. "NAME_HASH"
+			elseif v == "deviceHash" then
+				-- print("NAME_HASH")
+				signature = signature .. "DEVICE_HASH"
+			elseif v == "r?|d?" then
+				-- print("VALUE")
+				signature = signature .. "VALUE"
+			elseif string.find(v, "reagentHash") then
+				-- print("REAGENT_HASH")
+				signature = signature .. "REAGENT_HASH"
 			elseif string.find(v, "device") then
 				-- print("DEVICE")
 				signature = signature .. "DEVICE"
@@ -107,30 +134,6 @@ for index, value in pairs(json.scriptCommands) do
 			elseif string.find(v, "value") then
 				-- print("VALUE")
 				signature = signature .. "VALUE"
-			elseif v == "str" then
-				-- print("NAME")
-				signature = signature .. "NAME"
-			elseif v == "num" then
-				-- print("NUMBER")
-				signature = signature .. "NUMBER"
-			elseif v == "int" then
-				-- print("INT")
-				signature = signature .. "INT"
-			elseif v == "d?" then
-				-- print("DEVICE_IDENTIFIER")
-				signature = signature .. "DEVICE_IDENTIFIER"
-			elseif v == "batchMode" then
-				-- print("BATCH_MODE")
-				signature = signature .. "BATCH_MODE"
-			elseif v == "nameHash" then
-				-- print("NAME_HASH")
-				signature = signature .. "NAME_HASH"
-			elseif v == "r?|d?" then
-				-- print("VALUE")
-				signature = signature .. "VALUE"
-			elseif string.find(v, "reagentHash") then
-				-- print("REAGENT_HASH")
-				signature = signature .. "REAGENT_HASH"
 			else
 				-- print("LETTERED_VALUE")
 				signature = signature .. "LETTERED_VALUE"

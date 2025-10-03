@@ -1447,7 +1447,7 @@ impl Backend {
                                 instructions::Union(&[DataType::Name], "")
                             } else if type_data.defines.contains_key(ident) {
                                 instructions::Union(&[DataType::Number], "")
-                                // if rocketworks fixes the define bug with ids switch to this line
+                                // if rocketwerks fixes the define bug with ids switch to this line
                                 // instructions::Union(&[DataType::Number, DataType::Id], "")
                             } else if type_data.labels.contains_key(ident) {
                                 instructions::Union(&[DataType::Number], "")
