@@ -415,68 +415,57 @@ impl LanguageServer for Backend {
             return Err(tower_lsp::jsonrpc::Error::internal_error());
         };
 
+        // Semantic token check for labels so we can highlight identifiers that are labels
         let mut cursor = QueryCursor::new();
-        let query = Query::new(&tree_sitter_ic10::LANGUAGE.into(), "").unwrap();
+        let label_query = Query::new(&tree_sitter_ic10::LANGUAGE.into(), "(label)@a").unwrap();
+        let mut labels: Vec<String> = vec![];
+        cursor
+            .captures(&label_query, tree.root_node(), document.content.as_bytes())
+            .for_each(|(capture, _)| {
+                let node = capture.captures[0].node;
+                labels.push(
+                    node.utf8_text(document.content.as_bytes())
+                        .unwrap()
+                        .replace(":", ""),
+                )
+            });
 
+        let query = Query::new(&tree_sitter_ic10::LANGUAGE.into(), "(identifier)@a").unwrap();
         let mut previous_line = 0u32;
         let mut previous_col = 0u32;
-
-        let comment_idx = query.capture_index_for_name("comment");
-        let keyword_idx = query.capture_index_for_name("keyword");
-        let string_idx = query.capture_index_for_name("string");
-        let preproc_idx = query.capture_index_for_name("preproc");
-        let macro_idx = query.capture_index_for_name("macro");
-        let float_idx = query.capture_index_for_name("float");
-        let variable_idx = query.capture_index_for_name("variable");
 
         cursor
             .captures(&query, tree.root_node(), document.content.as_bytes())
             .for_each(|(capture, _)| {
                 let node = capture.captures[0].node;
-                let idx = capture.captures[0].index;
-                let start = node.range().start_point;
+                let node_str = node
+                    .utf8_text(document.content.as_bytes())
+                    .unwrap()
+                    .to_string();
+                if labels.contains(&node_str) {
+                    let start = node.range().start_point;
 
-                let delta_line = start.row as u32 - previous_line;
-                let delta_start = if delta_line == 0 {
-                    start.column as u32 - previous_col
-                } else {
-                    start.column as u32
-                };
-
-                let tokentype = {
-                    if Some(idx) == comment_idx {
-                        SemanticTokenType::COMMENT
-                    } else if Some(idx) == keyword_idx {
-                        SemanticTokenType::KEYWORD
-                    } else if Some(idx) == string_idx {
-                        SemanticTokenType::STRING
-                    } else if Some(idx) == preproc_idx {
-                        SemanticTokenType::FUNCTION
-                    } else if Some(idx) == macro_idx {
-                        SemanticTokenType::MACRO
-                    } else if Some(idx) == float_idx {
-                        SemanticTokenType::NUMBER
-                    } else if Some(idx) == variable_idx {
-                        SemanticTokenType::VARIABLE
+                    let delta_line = start.row as u32 - previous_line;
+                    let delta_start = if delta_line == 0 {
+                        start.column as u32 - previous_col
                     } else {
-                        return;
-                    }
-                };
-
-                ret.push(SemanticToken {
-                    delta_line,
-                    delta_start,
-                    length: node.range().end_point.column as u32 - start.column as u32,
-                    token_type: SEMANTIC_SYMBOL_LEGEND
-                        .iter()
-                        .position(|x| *x == tokentype)
-                        .unwrap() as u32,
-                    token_modifiers_bitset: 0,
-                });
-
-                previous_line = start.row as u32;
-                previous_col = start.column as u32;
+                        start.column as u32
+                    };
+                    ret.push(SemanticToken {
+                        delta_line,
+                        delta_start,
+                        length: node.range().end_point.column as u32 - start.column as u32,
+                        token_type: SEMANTIC_SYMBOL_LEGEND
+                            .iter()
+                            .position(|x| *x == SemanticTokenType::MACRO)
+                            .unwrap() as u32,
+                        token_modifiers_bitset: 0,
+                    });
+                    previous_line = start.row as u32;
+                    previous_col = start.column as u32;
+                }
             });
+
         Ok(Some(SemanticTokensResult::Tokens(SemanticTokens {
             result_id: None,
             data: ret,
