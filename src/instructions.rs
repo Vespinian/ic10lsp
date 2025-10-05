@@ -1153,6 +1153,13 @@ pub(crate) const BATCH_MODE_DOCS: phf::Map<&'static str, &'static str> = phf_map
     "Maximum" => "Highest of all read values",
 };
 
+pub(crate) const REAGENT_MODE_DOCS: phf::Map<&'static str, &'static str> = phf_map! {
+    "Contents" => "Will return the amount of a reagent hash inside the device",
+    "Required" => "Will return the needed amount of a reagent hash by the device",
+    "Recipe" => "Will return the needed amount of a reagent hash for a recipe selected in the device",
+    "TotalContents" => "Will return the total amount of reagents inside the device",
+};
+
 include!(concat!(env!("OUT_DIR"), "/stationpedia.rs"));
 
 #[cfg(test)]

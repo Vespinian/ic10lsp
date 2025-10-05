@@ -587,6 +587,7 @@ impl LanguageServer for Backend {
                     DataType::LogicType => instructions::LOGIC_TYPE_DOCS,
                     DataType::SlotLogicType => instructions::SLOT_TYPE_DOCS,
                     DataType::BatchMode => instructions::BATCH_MODE_DOCS,
+                    DataType::ReagentMode => instructions::REAGENT_MODE_DOCS,
                     _ => continue,
                 };
 
