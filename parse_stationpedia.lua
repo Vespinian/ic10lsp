@@ -100,9 +100,15 @@ table.insert(instructiondocs, "};")
 vim.fn.writefile(instruction, "generated/instructions.rs")
 vim.fn.writefile(instructiondocs, "generated/instructiondocs.rs")
 local file = io.open("generated/instructiondocs.rs", "r")
+if file == nil then
+	return
+end
 local content = file:read("*a")
 file:close()
-local file = io.open("generated/instructiondocs.rs", "w")
+file = io.open("generated/instructiondocs.rs", "w")
+if file == nil then
+	return
+end
 local content_mod = string.gsub(content, "\r", "\n")
 file:write(content_mod)
 file:close()

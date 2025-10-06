@@ -16,9 +16,15 @@ table.insert(logictypesdocs, "};")
 vim.fn.writefile(logictypes, "generated/logictypes.rs")
 vim.fn.writefile(logictypesdocs, "generated/logictypesdocs.rs")
 local file = io.open("generated/logictypesdocs.rs", "r")
+if file == nil then
+	return
+end
 local content = file:read("*a")
 file:close()
-local file = io.open("generated/logictypesdocs.rs", "w")
+file = io.open("generated/logictypesdocs.rs", "w")
+if file == nil then
+	return
+end
 local content_mod = string.gsub(content, "\r", "\n")
 file:write(content_mod)
 file:close()
@@ -43,11 +49,17 @@ table.insert(slotlogictypesdocs, "};")
 -- print(vim.inspect(slotlogictypes))
 vim.fn.writefile(slotlogictypes, "generated/slotlogictypes.rs")
 vim.fn.writefile(slotlogictypesdocs, "generated/slotlogictypesdocs.rs")
-local file = io.open("generated/slotlogictypesdocs.rs", "r")
-local content = file:read("*a")
+file = io.open("generated/slotlogictypesdocs.rs", "r")
+if file == nil then
+	return
+end
+content = file:read("*a")
 file:close()
-local file = io.open("generated/slotlogictypesdocs.rs", "w")
-local content_mod = string.gsub(content, "\r", "\n")
+file = io.open("generated/slotlogictypesdocs.rs", "w")
+if file == nil then
+	return
+end
+content_mod = string.gsub(content, "\r", "\n")
 file:write(content_mod)
 file:close()
 
