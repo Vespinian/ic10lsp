@@ -20,6 +20,7 @@ for index, value in pairs(json.scriptCommands) do
 	for substring in example:gmatch("%S+") do
 		table.insert(ins_example, substring)
 	end
+	local letter_num = 1
 	for i, v in pairs(ins_example) do
 		if i ~= 1 then
 			if i ~= 2 then
@@ -81,7 +82,18 @@ for index, value in pairs(json.scriptCommands) do
 				signature = signature .. "VALUE"
 			else
 				-- print("LETTERED_VALUE")
-				signature = signature .. "LETTERED_VALUE"
+				if letter_num == 1 then
+					signature = signature .. "A_VALUE"
+				elseif letter_num == 2 then
+					signature = signature .. "B_VALUE"
+				elseif letter_num == 3 then
+					signature = signature .. "C_VALUE"
+				elseif letter_num == 4 then
+					signature = signature .. "D_VALUE"
+				else
+					signature = signature .. "LETTERED_VALUE"
+				end
+				letter_num = letter_num + 1
 			end
 		end
 	end
