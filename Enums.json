@@ -81,7 +81,7 @@
         "RatioCarbonDioxide": {
           "value": 15,
           "deprecated": false,
-          "description": "The ratio of Carbon Dioxide in device atmosphere"
+          "description": "The ratio of <link=GasCarbonDioxide><color=#44AD83>Carbon Dioxide</color></link> in device atmosphere"
         },
         "RatioNitrogen": {
           "value": 16,
@@ -196,7 +196,7 @@
         "Color": {
           "value": 38,
           "deprecated": false,
-          "description": "\n        Whether driven by concerns for clarity, safety or simple aesthetics, Stationeers have access to a small rainbow of colors for their constructions. These are the color setting for devices, represented as an integer.\n\n0: Blue\n1: Grey\n2: Green\n3: Orange\n4: Red\n5: Yellow\n6: White\n7: Black\n8: Brown\n9: Khaki\n10: Pink\n11: Purple\n\n        It is an unwavering universal law that anything higher than 11 will be purple. The ODA is powerless to change this. Similarly, anything lower than 0 will be Blue.\n      "
+          "description": "\n        Whether driven by concerns for clarity, safety or simple aesthetics, <link=Stationeers><color=#0080FFFF>Stationeers</color></link> have access to a small rainbow of colors for their constructions. These are the color setting for devices, represented as an integer.\n\n0: Blue\n1: Grey\n2: Green\n3: Orange\n4: Red\n5: Yellow\n6: White\n7: Black\n8: Brown\n9: Khaki\n10: Pink\n11: Purple\n\n        It is an unwavering universal law that anything higher than 11 will be purple. The <link=ODA><color=#0080FFFF>ODA</color></link> is powerless to change this. Similarly, anything lower than 0 will be Blue.\n      "
         },
         "ElevatorSpeed": {
           "value": 39,
@@ -421,7 +421,7 @@
         "RatioNitrousOxide": {
           "value": 83,
           "deprecated": false,
-          "description": "The ratio of Nitrous Oxide in device atmosphere"
+          "description": "The ratio of <link=GasNitrousOxide><color=#44AD83>Nitrous Oxide</color></link> in device atmosphere"
         },
         "PrefabHash": {
           "value": 84,
@@ -471,7 +471,7 @@
         "CurrentResearchPodType": {
           "value": 93,
           "deprecated": false,
-          "description": ""
+          "description": "<A:EN:1890273128>"
         },
         "ManualResearchRequiredPod": {
           "value": 94,
@@ -551,7 +551,7 @@
         "RatioCarbonDioxideInput": {
           "value": 109,
           "deprecated": false,
-          "description": "The ratio of Carbon Dioxide in device's input network"
+          "description": "The ratio of <link=GasCarbonDioxide><color=#44AD83>Carbon Dioxide</color></link> in device's input network"
         },
         "RatioNitrogenInput": {
           "value": 110,
@@ -576,7 +576,7 @@
         "RatioNitrousOxideInput": {
           "value": 114,
           "deprecated": false,
-          "description": "The ratio of Nitrous Oxide in device's input network"
+          "description": "The ratio of <link=GasNitrousOxide><color=#44AD83>Nitrous Oxide</color></link> in device's input network"
         },
         "TotalMolesInput": {
           "value": 115,
@@ -601,7 +601,7 @@
         "RatioCarbonDioxideInput2": {
           "value": 119,
           "deprecated": false,
-          "description": "The ratio of Carbon Dioxide in device's Input2 network"
+          "description": "The ratio of <link=GasCarbonDioxide><color=#44AD83>Carbon Dioxide</color></link> in device's Input2 network"
         },
         "RatioNitrogenInput2": {
           "value": 120,
@@ -626,7 +626,7 @@
         "RatioNitrousOxideInput2": {
           "value": 124,
           "deprecated": false,
-          "description": "The ratio of Nitrous Oxide in device's Input2 network"
+          "description": "The ratio of <link=GasNitrousOxide><color=#44AD83>Nitrous Oxide</color></link> in device's Input2 network"
         },
         "TotalMolesInput2": {
           "value": 125,
@@ -651,7 +651,7 @@
         "RatioCarbonDioxideOutput": {
           "value": 129,
           "deprecated": false,
-          "description": "The ratio of Carbon Dioxide in device's Output network"
+          "description": "The ratio of <link=GasCarbonDioxide><color=#44AD83>Carbon Dioxide</color></link> in device's Output network"
         },
         "RatioNitrogenOutput": {
           "value": 130,
@@ -676,7 +676,7 @@
         "RatioNitrousOxideOutput": {
           "value": 134,
           "deprecated": false,
-          "description": "The ratio of Nitrous Oxide in device's Output network"
+          "description": "The ratio of <link=GasNitrousOxide><color=#44AD83>Nitrous Oxide</color></link> in device's Output network"
         },
         "TotalMolesOutput": {
           "value": 135,
@@ -701,7 +701,7 @@
         "RatioCarbonDioxideOutput2": {
           "value": 139,
           "deprecated": false,
-          "description": "The ratio of Carbon Dioxide in device's Output2 network"
+          "description": "The ratio of <link=GasCarbonDioxide><color=#44AD83>Carbon Dioxide</color></link> in device's Output2 network"
         },
         "RatioNitrogenOutput2": {
           "value": 140,
@@ -726,7 +726,7 @@
         "RatioNitrousOxideOutput2": {
           "value": 144,
           "deprecated": false,
-          "description": "The ratio of Nitrous Oxide in device's Output2 network"
+          "description": "The ratio of <link=GasNitrousOxide><color=#44AD83>Nitrous Oxide</color></link> in device's Output2 network"
         },
         "TotalMolesOutput2": {
           "value": 145,
@@ -886,27 +886,27 @@
         "RatioLiquidNitrogen": {
           "value": 177,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrogen in device atmosphere"
+          "description": "The ratio of <link=GasLiquidNitrogen><color=#44AD83>Liquid Nitrogen</color></link> in device atmosphere"
         },
         "RatioLiquidNitrogenInput": {
           "value": 178,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrogen in device's input network"
+          "description": "The ratio of <link=GasLiquidNitrogen><color=#44AD83>Liquid Nitrogen</color></link> in device's input network"
         },
         "RatioLiquidNitrogenInput2": {
           "value": 179,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrogen in device's Input2 network"
+          "description": "The ratio of <link=GasLiquidNitrogen><color=#44AD83>Liquid Nitrogen</color></link> in device's Input2 network"
         },
         "RatioLiquidNitrogenOutput": {
           "value": 180,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrogen in device's Output network"
+          "description": "The ratio of <link=GasLiquidNitrogen><color=#44AD83>Liquid Nitrogen</color></link> in device's Output network"
         },
         "RatioLiquidNitrogenOutput2": {
           "value": 181,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrogen in device's Output2 network"
+          "description": "The ratio of <link=GasLiquidNitrogen><color=#44AD83>Liquid Nitrogen</color></link> in device's Output2 network"
         },
         "VolumeOfLiquid": {
           "value": 182,
@@ -916,77 +916,77 @@
         "RatioLiquidOxygen": {
           "value": 183,
           "deprecated": false,
-          "description": "The ratio of Liquid Oxygen in device's Atmosphere"
+          "description": "The ratio of <link=GasLiquidOxygen><color=#44AD83>Liquid Oxygen</color></link> in device's Atmosphere"
         },
         "RatioLiquidOxygenInput": {
           "value": 184,
           "deprecated": false,
-          "description": "The ratio of Liquid Oxygen in device's Input Atmosphere"
+          "description": "The ratio of <link=GasLiquidOxygen><color=#44AD83>Liquid Oxygen</color></link> in device's Input Atmosphere"
         },
         "RatioLiquidOxygenInput2": {
           "value": 185,
           "deprecated": false,
-          "description": "The ratio of Liquid Oxygen in device's Input2 Atmosphere"
+          "description": "The ratio of <link=GasLiquidOxygen><color=#44AD83>Liquid Oxygen</color></link> in device's Input2 Atmosphere"
         },
         "RatioLiquidOxygenOutput": {
           "value": 186,
           "deprecated": false,
-          "description": "The ratio of Liquid Oxygen in device's device's Output Atmosphere"
+          "description": "The ratio of <link=GasLiquidOxygen><color=#44AD83>Liquid Oxygen</color></link> in device's device's Output Atmosphere"
         },
         "RatioLiquidOxygenOutput2": {
           "value": 187,
           "deprecated": false,
-          "description": "The ratio of Liquid Oxygen in device's Output2 Atmopshere"
+          "description": "The ratio of <link=GasLiquidOxygen><color=#44AD83>Liquid Oxygen</color></link> in device's Output2 Atmopshere"
         },
         "RatioLiquidVolatiles": {
           "value": 188,
           "deprecated": false,
-          "description": "The ratio of Liquid Volatiles in device's Atmosphere"
+          "description": "The ratio of <link=GasLiquidVolatiles><color=#44AD83>Liquid Volatiles</color></link> in device's Atmosphere"
         },
         "RatioLiquidVolatilesInput": {
           "value": 189,
           "deprecated": false,
-          "description": "The ratio of Liquid Volatiles in device's Input Atmosphere"
+          "description": "The ratio of <link=GasLiquidVolatiles><color=#44AD83>Liquid Volatiles</color></link> in device's Input Atmosphere"
         },
         "RatioLiquidVolatilesInput2": {
           "value": 190,
           "deprecated": false,
-          "description": "The ratio of Liquid Volatiles in device's Input2 Atmosphere"
+          "description": "The ratio of <link=GasLiquidVolatiles><color=#44AD83>Liquid Volatiles</color></link> in device's Input2 Atmosphere"
         },
         "RatioLiquidVolatilesOutput": {
           "value": 191,
           "deprecated": false,
-          "description": "The ratio of Liquid Volatiles in device's device's Output Atmosphere"
+          "description": "The ratio of <link=GasLiquidVolatiles><color=#44AD83>Liquid Volatiles</color></link> in device's device's Output Atmosphere"
         },
         "RatioLiquidVolatilesOutput2": {
           "value": 192,
           "deprecated": false,
-          "description": "The ratio of Liquid Volatiles in device's Output2 Atmopshere"
+          "description": "The ratio of <link=GasLiquidVolatiles><color=#44AD83>Liquid Volatiles</color></link> in device's Output2 Atmopshere"
         },
         "RatioSteam": {
           "value": 193,
           "deprecated": false,
-          "description": "The ratio of Steam in device's Atmosphere"
+          "description": "The ratio of <link=GasSteam><color=#44AD83>Steam</color></link> in device's Atmosphere"
         },
         "RatioSteamInput": {
           "value": 194,
           "deprecated": false,
-          "description": "The ratio of Steam in device's Input Atmosphere"
+          "description": "The ratio of <link=GasSteam><color=#44AD83>Steam</color></link> in device's Input Atmosphere"
         },
         "RatioSteamInput2": {
           "value": 195,
           "deprecated": false,
-          "description": "The ratio of Steam in device's Input2 Atmosphere"
+          "description": "The ratio of <link=GasSteam><color=#44AD83>Steam</color></link> in device's Input2 Atmosphere"
         },
         "RatioSteamOutput": {
           "value": 196,
           "deprecated": false,
-          "description": "The ratio of Steam in device's device's Output Atmosphere"
+          "description": "The ratio of <link=GasSteam><color=#44AD83>Steam</color></link> in device's device's Output Atmosphere"
         },
         "RatioSteamOutput2": {
           "value": 197,
           "deprecated": false,
-          "description": "The ratio of Steam in device's Output2 Atmopshere"
+          "description": "The ratio of <link=GasSteam><color=#44AD83>Steam</color></link> in device's Output2 Atmopshere"
         },
         "ContactTypeId": {
           "value": 198,
@@ -996,77 +996,77 @@
         "RatioLiquidCarbonDioxide": {
           "value": 199,
           "deprecated": false,
-          "description": "The ratio of Liquid Carbon Dioxide in device's Atmosphere"
+          "description": "The ratio of <link=GasLiquidCarbonDioxide><color=#44AD83>Liquid Carbon Dioxide</color></link> in device's Atmosphere"
         },
         "RatioLiquidCarbonDioxideInput": {
           "value": 200,
           "deprecated": false,
-          "description": "The ratio of Liquid Carbon Dioxide in device's Input Atmosphere"
+          "description": "The ratio of <link=GasLiquidCarbonDioxide><color=#44AD83>Liquid Carbon Dioxide</color></link> in device's Input Atmosphere"
         },
         "RatioLiquidCarbonDioxideInput2": {
           "value": 201,
           "deprecated": false,
-          "description": "The ratio of Liquid Carbon Dioxide in device's Input2 Atmosphere"
+          "description": "The ratio of <link=GasLiquidCarbonDioxide><color=#44AD83>Liquid Carbon Dioxide</color></link> in device's Input2 Atmosphere"
         },
         "RatioLiquidCarbonDioxideOutput": {
           "value": 202,
           "deprecated": false,
-          "description": "The ratio of Liquid Carbon Dioxide in device's device's Output Atmosphere"
+          "description": "The ratio of <link=GasLiquidCarbonDioxide><color=#44AD83>Liquid Carbon Dioxide</color></link> in device's device's Output Atmosphere"
         },
         "RatioLiquidCarbonDioxideOutput2": {
           "value": 203,
           "deprecated": false,
-          "description": "The ratio of Liquid Carbon Dioxide in device's Output2 Atmopshere"
+          "description": "The ratio of <link=GasLiquidCarbonDioxide><color=#44AD83>Liquid Carbon Dioxide</color></link> in device's Output2 Atmopshere"
         },
         "RatioLiquidPollutant": {
           "value": 204,
           "deprecated": false,
-          "description": "The ratio of Liquid Pollutant in device's Atmosphere"
+          "description": "The ratio of <link=GasLiquidPollutant><color=#44AD83>Liquid Pollutant</color></link> in device's Atmosphere"
         },
         "RatioLiquidPollutantInput": {
           "value": 205,
           "deprecated": false,
-          "description": "The ratio of Liquid Pollutant in device's Input Atmosphere"
+          "description": "The ratio of <link=GasLiquidPollutant><color=#44AD83>Liquid Pollutant</color></link> in device's Input Atmosphere"
         },
         "RatioLiquidPollutantInput2": {
           "value": 206,
           "deprecated": false,
-          "description": "The ratio of Liquid Pollutant in device's Input2 Atmosphere"
+          "description": "The ratio of <link=GasLiquidPollutant><color=#44AD83>Liquid Pollutant</color></link> in device's Input2 Atmosphere"
         },
         "RatioLiquidPollutantOutput": {
           "value": 207,
           "deprecated": false,
-          "description": "The ratio of Liquid Pollutant in device's device's Output Atmosphere"
+          "description": "The ratio of <link=GasLiquidPollutant><color=#44AD83>Liquid Pollutant</color></link> in device's device's Output Atmosphere"
         },
         "RatioLiquidPollutantOutput2": {
           "value": 208,
           "deprecated": false,
-          "description": "The ratio of Liquid Pollutant in device's Output2 Atmopshere"
+          "description": "The ratio of <link=GasLiquidPollutant><color=#44AD83>Liquid Pollutant</color></link> in device's Output2 Atmopshere"
         },
         "RatioLiquidNitrousOxide": {
           "value": 209,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrous Oxide in device's Atmosphere"
+          "description": "The ratio of <link=GasLiquidNitrousOxide><color=#44AD83>Liquid Nitrous Oxide</color></link> in device's Atmosphere"
         },
         "RatioLiquidNitrousOxideInput": {
           "value": 210,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrous Oxide in device's Input Atmosphere"
+          "description": "The ratio of <link=GasLiquidNitrousOxide><color=#44AD83>Liquid Nitrous Oxide</color></link> in device's Input Atmosphere"
         },
         "RatioLiquidNitrousOxideInput2": {
           "value": 211,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrous Oxide in device's Input2 Atmosphere"
+          "description": "The ratio of <link=GasLiquidNitrousOxide><color=#44AD83>Liquid Nitrous Oxide</color></link> in device's Input2 Atmosphere"
         },
         "RatioLiquidNitrousOxideOutput": {
           "value": 212,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrous Oxide in device's device's Output Atmosphere"
+          "description": "The ratio of <link=GasLiquidNitrousOxide><color=#44AD83>Liquid Nitrous Oxide</color></link> in device's device's Output Atmosphere"
         },
         "RatioLiquidNitrousOxideOutput2": {
           "value": 213,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrous Oxide in device's Output2 Atmopshere"
+          "description": "The ratio of <link=GasLiquidNitrousOxide><color=#44AD83>Liquid Nitrous Oxide</color></link> in device's Output2 Atmopshere"
         },
         "Progress": {
           "value": 214,
@@ -1261,12 +1261,12 @@
         "RatioHydrogen": {
           "value": 252,
           "deprecated": false,
-          "description": "The ratio of Hydrogen in device's Atmopshere"
+          "description": "The ratio of <link=GasHydrogen><color=#44AD83>Hydrogen</color></link> in device's Atmopshere"
         },
         "RatioLiquidHydrogen": {
           "value": 253,
           "deprecated": false,
-          "description": "The ratio of Liquid Hydrogen in device's Atmopshere"
+          "description": "The ratio of <link=GasLiquidHydrogen><color=#44AD83>Liquid Hydrogen</color></link> in device's Atmopshere"
         },
         "RatioPollutedWater": {
           "value": 254,
@@ -1698,7 +1698,7 @@
         "RatioCarbonDioxide": {
           "value": 15,
           "deprecated": false,
-          "description": "The ratio of Carbon Dioxide in device atmosphere"
+          "description": "The ratio of <link=GasCarbonDioxide><color=#44AD83>Carbon Dioxide</color></link> in device atmosphere"
         },
         "RatioNitrogen": {
           "value": 16,
@@ -1813,7 +1813,7 @@
         "Color": {
           "value": 38,
           "deprecated": false,
-          "description": "\n        Whether driven by concerns for clarity, safety or simple aesthetics, Stationeers have access to a small rainbow of colors for their constructions. These are the color setting for devices, represented as an integer.\n\n0: Blue\n1: Grey\n2: Green\n3: Orange\n4: Red\n5: Yellow\n6: White\n7: Black\n8: Brown\n9: Khaki\n10: Pink\n11: Purple\n\n        It is an unwavering universal law that anything higher than 11 will be purple. The ODA is powerless to change this. Similarly, anything lower than 0 will be Blue.\n      "
+          "description": "\n        Whether driven by concerns for clarity, safety or simple aesthetics, <link=Stationeers><color=#0080FFFF>Stationeers</color></link> have access to a small rainbow of colors for their constructions. These are the color setting for devices, represented as an integer.\n\n0: Blue\n1: Grey\n2: Green\n3: Orange\n4: Red\n5: Yellow\n6: White\n7: Black\n8: Brown\n9: Khaki\n10: Pink\n11: Purple\n\n        It is an unwavering universal law that anything higher than 11 will be purple. The <link=ODA><color=#0080FFFF>ODA</color></link> is powerless to change this. Similarly, anything lower than 0 will be Blue.\n      "
         },
         "ElevatorSpeed": {
           "value": 39,
@@ -2038,7 +2038,7 @@
         "RatioNitrousOxide": {
           "value": 83,
           "deprecated": false,
-          "description": "The ratio of Nitrous Oxide in device atmosphere"
+          "description": "The ratio of <link=GasNitrousOxide><color=#44AD83>Nitrous Oxide</color></link> in device atmosphere"
         },
         "PrefabHash": {
           "value": 84,
@@ -2088,7 +2088,7 @@
         "CurrentResearchPodType": {
           "value": 93,
           "deprecated": false,
-          "description": ""
+          "description": "<A:EN:1890273128>"
         },
         "ManualResearchRequiredPod": {
           "value": 94,
@@ -2168,7 +2168,7 @@
         "RatioCarbonDioxideInput": {
           "value": 109,
           "deprecated": false,
-          "description": "The ratio of Carbon Dioxide in device's input network"
+          "description": "The ratio of <link=GasCarbonDioxide><color=#44AD83>Carbon Dioxide</color></link> in device's input network"
         },
         "RatioNitrogenInput": {
           "value": 110,
@@ -2193,7 +2193,7 @@
         "RatioNitrousOxideInput": {
           "value": 114,
           "deprecated": false,
-          "description": "The ratio of Nitrous Oxide in device's input network"
+          "description": "The ratio of <link=GasNitrousOxide><color=#44AD83>Nitrous Oxide</color></link> in device's input network"
         },
         "TotalMolesInput": {
           "value": 115,
@@ -2218,7 +2218,7 @@
         "RatioCarbonDioxideInput2": {
           "value": 119,
           "deprecated": false,
-          "description": "The ratio of Carbon Dioxide in device's Input2 network"
+          "description": "The ratio of <link=GasCarbonDioxide><color=#44AD83>Carbon Dioxide</color></link> in device's Input2 network"
         },
         "RatioNitrogenInput2": {
           "value": 120,
@@ -2243,7 +2243,7 @@
         "RatioNitrousOxideInput2": {
           "value": 124,
           "deprecated": false,
-          "description": "The ratio of Nitrous Oxide in device's Input2 network"
+          "description": "The ratio of <link=GasNitrousOxide><color=#44AD83>Nitrous Oxide</color></link> in device's Input2 network"
         },
         "TotalMolesInput2": {
           "value": 125,
@@ -2268,7 +2268,7 @@
         "RatioCarbonDioxideOutput": {
           "value": 129,
           "deprecated": false,
-          "description": "The ratio of Carbon Dioxide in device's Output network"
+          "description": "The ratio of <link=GasCarbonDioxide><color=#44AD83>Carbon Dioxide</color></link> in device's Output network"
         },
         "RatioNitrogenOutput": {
           "value": 130,
@@ -2293,7 +2293,7 @@
         "RatioNitrousOxideOutput": {
           "value": 134,
           "deprecated": false,
-          "description": "The ratio of Nitrous Oxide in device's Output network"
+          "description": "The ratio of <link=GasNitrousOxide><color=#44AD83>Nitrous Oxide</color></link> in device's Output network"
         },
         "TotalMolesOutput": {
           "value": 135,
@@ -2318,7 +2318,7 @@
         "RatioCarbonDioxideOutput2": {
           "value": 139,
           "deprecated": false,
-          "description": "The ratio of Carbon Dioxide in device's Output2 network"
+          "description": "The ratio of <link=GasCarbonDioxide><color=#44AD83>Carbon Dioxide</color></link> in device's Output2 network"
         },
         "RatioNitrogenOutput2": {
           "value": 140,
@@ -2343,7 +2343,7 @@
         "RatioNitrousOxideOutput2": {
           "value": 144,
           "deprecated": false,
-          "description": "The ratio of Nitrous Oxide in device's Output2 network"
+          "description": "The ratio of <link=GasNitrousOxide><color=#44AD83>Nitrous Oxide</color></link> in device's Output2 network"
         },
         "TotalMolesOutput2": {
           "value": 145,
@@ -2503,27 +2503,27 @@
         "RatioLiquidNitrogen": {
           "value": 177,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrogen in device atmosphere"
+          "description": "The ratio of <link=GasLiquidNitrogen><color=#44AD83>Liquid Nitrogen</color></link> in device atmosphere"
         },
         "RatioLiquidNitrogenInput": {
           "value": 178,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrogen in device's input network"
+          "description": "The ratio of <link=GasLiquidNitrogen><color=#44AD83>Liquid Nitrogen</color></link> in device's input network"
         },
         "RatioLiquidNitrogenInput2": {
           "value": 179,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrogen in device's Input2 network"
+          "description": "The ratio of <link=GasLiquidNitrogen><color=#44AD83>Liquid Nitrogen</color></link> in device's Input2 network"
         },
         "RatioLiquidNitrogenOutput": {
           "value": 180,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrogen in device's Output network"
+          "description": "The ratio of <link=GasLiquidNitrogen><color=#44AD83>Liquid Nitrogen</color></link> in device's Output network"
         },
         "RatioLiquidNitrogenOutput2": {
           "value": 181,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrogen in device's Output2 network"
+          "description": "The ratio of <link=GasLiquidNitrogen><color=#44AD83>Liquid Nitrogen</color></link> in device's Output2 network"
         },
         "VolumeOfLiquid": {
           "value": 182,
@@ -2533,77 +2533,77 @@
         "RatioLiquidOxygen": {
           "value": 183,
           "deprecated": false,
-          "description": "The ratio of Liquid Oxygen in device's Atmosphere"
+          "description": "The ratio of <link=GasLiquidOxygen><color=#44AD83>Liquid Oxygen</color></link> in device's Atmosphere"
         },
         "RatioLiquidOxygenInput": {
           "value": 184,
           "deprecated": false,
-          "description": "The ratio of Liquid Oxygen in device's Input Atmosphere"
+          "description": "The ratio of <link=GasLiquidOxygen><color=#44AD83>Liquid Oxygen</color></link> in device's Input Atmosphere"
         },
         "RatioLiquidOxygenInput2": {
           "value": 185,
           "deprecated": false,
-          "description": "The ratio of Liquid Oxygen in device's Input2 Atmosphere"
+          "description": "The ratio of <link=GasLiquidOxygen><color=#44AD83>Liquid Oxygen</color></link> in device's Input2 Atmosphere"
         },
         "RatioLiquidOxygenOutput": {
           "value": 186,
           "deprecated": false,
-          "description": "The ratio of Liquid Oxygen in device's device's Output Atmosphere"
+          "description": "The ratio of <link=GasLiquidOxygen><color=#44AD83>Liquid Oxygen</color></link> in device's device's Output Atmosphere"
         },
         "RatioLiquidOxygenOutput2": {
           "value": 187,
           "deprecated": false,
-          "description": "The ratio of Liquid Oxygen in device's Output2 Atmopshere"
+          "description": "The ratio of <link=GasLiquidOxygen><color=#44AD83>Liquid Oxygen</color></link> in device's Output2 Atmopshere"
         },
         "RatioLiquidVolatiles": {
           "value": 188,
           "deprecated": false,
-          "description": "The ratio of Liquid Volatiles in device's Atmosphere"
+          "description": "The ratio of <link=GasLiquidVolatiles><color=#44AD83>Liquid Volatiles</color></link> in device's Atmosphere"
         },
         "RatioLiquidVolatilesInput": {
           "value": 189,
           "deprecated": false,
-          "description": "The ratio of Liquid Volatiles in device's Input Atmosphere"
+          "description": "The ratio of <link=GasLiquidVolatiles><color=#44AD83>Liquid Volatiles</color></link> in device's Input Atmosphere"
         },
         "RatioLiquidVolatilesInput2": {
           "value": 190,
           "deprecated": false,
-          "description": "The ratio of Liquid Volatiles in device's Input2 Atmosphere"
+          "description": "The ratio of <link=GasLiquidVolatiles><color=#44AD83>Liquid Volatiles</color></link> in device's Input2 Atmosphere"
         },
         "RatioLiquidVolatilesOutput": {
           "value": 191,
           "deprecated": false,
-          "description": "The ratio of Liquid Volatiles in device's device's Output Atmosphere"
+          "description": "The ratio of <link=GasLiquidVolatiles><color=#44AD83>Liquid Volatiles</color></link> in device's device's Output Atmosphere"
         },
         "RatioLiquidVolatilesOutput2": {
           "value": 192,
           "deprecated": false,
-          "description": "The ratio of Liquid Volatiles in device's Output2 Atmopshere"
+          "description": "The ratio of <link=GasLiquidVolatiles><color=#44AD83>Liquid Volatiles</color></link> in device's Output2 Atmopshere"
         },
         "RatioSteam": {
           "value": 193,
           "deprecated": false,
-          "description": "The ratio of Steam in device's Atmosphere"
+          "description": "The ratio of <link=GasSteam><color=#44AD83>Steam</color></link> in device's Atmosphere"
         },
         "RatioSteamInput": {
           "value": 194,
           "deprecated": false,
-          "description": "The ratio of Steam in device's Input Atmosphere"
+          "description": "The ratio of <link=GasSteam><color=#44AD83>Steam</color></link> in device's Input Atmosphere"
         },
         "RatioSteamInput2": {
           "value": 195,
           "deprecated": false,
-          "description": "The ratio of Steam in device's Input2 Atmosphere"
+          "description": "The ratio of <link=GasSteam><color=#44AD83>Steam</color></link> in device's Input2 Atmosphere"
         },
         "RatioSteamOutput": {
           "value": 196,
           "deprecated": false,
-          "description": "The ratio of Steam in device's device's Output Atmosphere"
+          "description": "The ratio of <link=GasSteam><color=#44AD83>Steam</color></link> in device's device's Output Atmosphere"
         },
         "RatioSteamOutput2": {
           "value": 197,
           "deprecated": false,
-          "description": "The ratio of Steam in device's Output2 Atmopshere"
+          "description": "The ratio of <link=GasSteam><color=#44AD83>Steam</color></link> in device's Output2 Atmopshere"
         },
         "ContactTypeId": {
           "value": 198,
@@ -2613,77 +2613,77 @@
         "RatioLiquidCarbonDioxide": {
           "value": 199,
           "deprecated": false,
-          "description": "The ratio of Liquid Carbon Dioxide in device's Atmosphere"
+          "description": "The ratio of <link=GasLiquidCarbonDioxide><color=#44AD83>Liquid Carbon Dioxide</color></link> in device's Atmosphere"
         },
         "RatioLiquidCarbonDioxideInput": {
           "value": 200,
           "deprecated": false,
-          "description": "The ratio of Liquid Carbon Dioxide in device's Input Atmosphere"
+          "description": "The ratio of <link=GasLiquidCarbonDioxide><color=#44AD83>Liquid Carbon Dioxide</color></link> in device's Input Atmosphere"
         },
         "RatioLiquidCarbonDioxideInput2": {
           "value": 201,
           "deprecated": false,
-          "description": "The ratio of Liquid Carbon Dioxide in device's Input2 Atmosphere"
+          "description": "The ratio of <link=GasLiquidCarbonDioxide><color=#44AD83>Liquid Carbon Dioxide</color></link> in device's Input2 Atmosphere"
         },
         "RatioLiquidCarbonDioxideOutput": {
           "value": 202,
           "deprecated": false,
-          "description": "The ratio of Liquid Carbon Dioxide in device's device's Output Atmosphere"
+          "description": "The ratio of <link=GasLiquidCarbonDioxide><color=#44AD83>Liquid Carbon Dioxide</color></link> in device's device's Output Atmosphere"
         },
         "RatioLiquidCarbonDioxideOutput2": {
           "value": 203,
           "deprecated": false,
-          "description": "The ratio of Liquid Carbon Dioxide in device's Output2 Atmopshere"
+          "description": "The ratio of <link=GasLiquidCarbonDioxide><color=#44AD83>Liquid Carbon Dioxide</color></link> in device's Output2 Atmopshere"
         },
         "RatioLiquidPollutant": {
           "value": 204,
           "deprecated": false,
-          "description": "The ratio of Liquid Pollutant in device's Atmosphere"
+          "description": "The ratio of <link=GasLiquidPollutant><color=#44AD83>Liquid Pollutant</color></link> in device's Atmosphere"
         },
         "RatioLiquidPollutantInput": {
           "value": 205,
           "deprecated": false,
-          "description": "The ratio of Liquid Pollutant in device's Input Atmosphere"
+          "description": "The ratio of <link=GasLiquidPollutant><color=#44AD83>Liquid Pollutant</color></link> in device's Input Atmosphere"
         },
         "RatioLiquidPollutantInput2": {
           "value": 206,
           "deprecated": false,
-          "description": "The ratio of Liquid Pollutant in device's Input2 Atmosphere"
+          "description": "The ratio of <link=GasLiquidPollutant><color=#44AD83>Liquid Pollutant</color></link> in device's Input2 Atmosphere"
         },
         "RatioLiquidPollutantOutput": {
           "value": 207,
           "deprecated": false,
-          "description": "The ratio of Liquid Pollutant in device's device's Output Atmosphere"
+          "description": "The ratio of <link=GasLiquidPollutant><color=#44AD83>Liquid Pollutant</color></link> in device's device's Output Atmosphere"
         },
         "RatioLiquidPollutantOutput2": {
           "value": 208,
           "deprecated": false,
-          "description": "The ratio of Liquid Pollutant in device's Output2 Atmopshere"
+          "description": "The ratio of <link=GasLiquidPollutant><color=#44AD83>Liquid Pollutant</color></link> in device's Output2 Atmopshere"
         },
         "RatioLiquidNitrousOxide": {
           "value": 209,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrous Oxide in device's Atmosphere"
+          "description": "The ratio of <link=GasLiquidNitrousOxide><color=#44AD83>Liquid Nitrous Oxide</color></link> in device's Atmosphere"
         },
         "RatioLiquidNitrousOxideInput": {
           "value": 210,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrous Oxide in device's Input Atmosphere"
+          "description": "The ratio of <link=GasLiquidNitrousOxide><color=#44AD83>Liquid Nitrous Oxide</color></link> in device's Input Atmosphere"
         },
         "RatioLiquidNitrousOxideInput2": {
           "value": 211,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrous Oxide in device's Input2 Atmosphere"
+          "description": "The ratio of <link=GasLiquidNitrousOxide><color=#44AD83>Liquid Nitrous Oxide</color></link> in device's Input2 Atmosphere"
         },
         "RatioLiquidNitrousOxideOutput": {
           "value": 212,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrous Oxide in device's device's Output Atmosphere"
+          "description": "The ratio of <link=GasLiquidNitrousOxide><color=#44AD83>Liquid Nitrous Oxide</color></link> in device's device's Output Atmosphere"
         },
         "RatioLiquidNitrousOxideOutput2": {
           "value": 213,
           "deprecated": false,
-          "description": "The ratio of Liquid Nitrous Oxide in device's Output2 Atmopshere"
+          "description": "The ratio of <link=GasLiquidNitrousOxide><color=#44AD83>Liquid Nitrous Oxide</color></link> in device's Output2 Atmopshere"
         },
         "Progress": {
           "value": 214,
@@ -2878,12 +2878,12 @@
         "RatioHydrogen": {
           "value": 252,
           "deprecated": false,
-          "description": "The ratio of Hydrogen in device's Atmopshere"
+          "description": "The ratio of <link=GasHydrogen><color=#44AD83>Hydrogen</color></link> in device's Atmopshere"
         },
         "RatioLiquidHydrogen": {
           "value": 253,
           "deprecated": false,
-          "description": "The ratio of Liquid Hydrogen in device's Atmopshere"
+          "description": "The ratio of <link=GasLiquidHydrogen><color=#44AD83>Liquid Hydrogen</color></link> in device's Atmopshere"
         },
         "RatioPollutedWater": {
           "value": 254,
@@ -4542,5 +4542,5 @@
         }
       }
     }
-  },
+  }
 }

@@ -450,6 +450,8 @@
 -342072665 StructureCamera
 -343130095 ModularDeviceLabelPlate5x5
 -345383640 StructureLogicReader
+-346183425 StructureSuitStorageLocker
+-347191982 ItemSuitHARM
 -348054045 StructureFiltration
 -348918222 StructureCompositeCladdingAngledCornerLongR
 -349716617 StructureCableFuse50k
@@ -503,6 +505,7 @@
 -498464883 ItemSprayCanBlue
 -503738105 ItemGasFilterPollutantsInfinite
 -504717121 ItemWirelessBatteryCellExtraLarge
+-504802150 StructureSuitStorageFrame
 -507770416 StructureSmallDirectHeatExchangeLiquidtoLiquid
 -517628750 StructureWaterDigitalValve
 -518701409 ModularDeviceSliderDiode2
@@ -658,6 +661,7 @@
 -975966237 StructureMediumRadiator
 -976273247 Landingpad_StraightPiece01
 -981223316 StructureCableCorner4HBurnt
+-981522067 ItemSuitHelmetHARM
 -983091249 ItemCobaltOre
 -988382953 StructureLargeRocketGasFuelTank
 -98995857 ItemKitArcFurnace
@@ -992,6 +996,7 @@
 1915566057 ItemGasFilterPollutants
 1918456047 ItemSprayCanKhaki
 1921918951 ItemKitPumpedLiquidEngine
+1922318669 ModularDeviceAlarm
 1922506192 StructurePowerUmbilicalFemaleSide
 1924673028 ItemSoybean
 1926651727 StructureInsulatedPipeLiquidCrossJunction
@@ -1222,6 +1227,7 @@
 517326020 StructureInsulatedHeavyDutyLiquidPipeCorner
 518925193 StructureRocketTransformerSmall
 519913639 DynamicAirConditioner
+521229716 ItemKitModularDiagramLine
 529137748 ItemKitToolManufactory
 529996327 ItemKitSign
 532208167 ItemRocketDeepScanningHead
