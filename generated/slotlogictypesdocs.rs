@@ -1,10 +1,11 @@
-pub(crate) const SLOT_TYPE_DOCS: phf::Map<&'static str, &'static str> = phf_map! {
+pub(crate) const SLOT_TYPE_DOCS: phf::Map = phf_map! {
     "Charge" => "returns current energy charge the slot occupant is holding",
     "ChargeRatio" => "returns current energy charge the slot occupant is holding as a ratio between 0 and 1 of its maximum",
     "Class" => "returns integer representing the class of object",
     "Damage" => "returns the damage state of the item in the slot",
     "Efficiency" => "returns the growth efficiency of the plant in the slot",
     "FilterType" => "No description available",
+    "FreeSlots" => "The number of free slots available in this object.",
     "Growth" => "returns the current growth state of the plant in the slot",
     "HarvestedHash" => "No description available",
     "Health" => "Returns the health of the plant in the slot",
@@ -29,5 +30,6 @@ pub(crate) const SLOT_TYPE_DOCS: phf::Map<&'static str, &'static str> = phf_map!
     "SeedingRatio" => "How far the plant is towards seeding represented as a fraction between 0 and 1, with 1 being seeding and will supply seeds when harvested.",
     "SortingClass" => "No description available",
     "Temperature" => "returns temperature of the slot occupants internal atmosphere",
+    "TotalSlots" => "The total number of slots available in this object.",
     "Volume" => "No description available",
 };

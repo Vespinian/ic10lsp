@@ -4,7 +4,10 @@ local logictypes = {}
 local logictypesdocs = {}
 for index, value in pairs(json.scriptEnums.LogicType.values) do
 	table.insert(logictypes, '    "' .. index .. '",')
-	table.insert(logictypesdocs, '    "' .. index .. '" => "' .. string.gsub(value.description, "\n", "\r") .. '",')
+	table.insert(
+		logictypesdocs,
+		'    "' .. index .. '" => "' .. string.gsub(value.description, "\n", "\r"):gsub("%<[^>]*.", "") .. '",'
+	)
 end
 table.sort(logictypes)
 table.sort(logictypesdocs)
@@ -33,7 +36,10 @@ local slotlogictypes = {}
 local slotlogictypesdocs = {}
 for index, value in pairs(json.scriptEnums.LogicSlotType.values) do
 	table.insert(slotlogictypes, '    "' .. index .. '",')
-	table.insert(slotlogictypesdocs, '    "' .. index .. '" => "' .. string.gsub(value.description, "\n", "\r") .. '",')
+	table.insert(
+		slotlogictypesdocs,
+		'    "' .. index .. '" => "' .. string.gsub(value.description, "\n", "\r"):gsub("%<[^>]*.", "") .. '",'
+	)
 end
 table.sort(slotlogictypes)
 table.sort(slotlogictypesdocs)
@@ -59,7 +65,7 @@ file = io.open("generated/slotlogictypesdocs.rs", "w")
 if file == nil then
 	return
 end
-content_mod = string.gsub(content, "\r", "\n")
+content_mod = string.gsub(content, "\r", "\n"):gsub("%<[^>]*.", "")
 file:write(content_mod)
 file:close()
 

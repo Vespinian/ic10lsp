@@ -5,6 +5,7 @@ pub(crate) const SLOT_LOGIC_TYPES: phf::Set<&'static str> = phf_set! {
     "Damage",
     "Efficiency",
     "FilterType",
+    "FreeSlots",
     "Growth",
     "HarvestedHash",
     "Health",
@@ -29,5 +30,6 @@ pub(crate) const SLOT_LOGIC_TYPES: phf::Set<&'static str> = phf_set! {
     "SeedingRatio",
     "SortingClass",
     "Temperature",
+    "TotalSlots",
     "Volume",
 };
