@@ -1,4 +1,4 @@
-pub(crate) const SLOT_TYPE_DOCS: phf::Map = phf_map! {
+pub(crate) const SLOT_TYPE_DOCS: phf::Map<&'static str, &'static str> = phf_map! {
     "Charge" => "returns current energy charge the slot occupant is holding",
     "ChargeRatio" => "returns current energy charge the slot occupant is holding as a ratio between 0 and 1 of its maximum",
     "Class" => "returns integer representing the class of object",

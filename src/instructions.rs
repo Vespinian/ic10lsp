@@ -241,6 +241,7 @@ pub(crate) const LOGIC_TYPES: phf::Set<&'static str> = phf_set! {
     "CombustionOutput",
     "CombustionOutput2",
     "CompletionRatio",
+    "ContactSlotIndex",
     "ContactTypeId",
     "CurrentCode",
     "CurrentResearchPodType",
@@ -299,6 +300,7 @@ pub(crate) const LOGIC_TYPES: phf::Set<&'static str> = phf_set! {
     "NavPoints",
     "NetworkFault",
     "NextWeatherEventTime",
+    "NextWeatherHash",
     "None",
     "On",
     "Open",
@@ -496,6 +498,7 @@ pub(crate) const SLOT_LOGIC_TYPES: phf::Set<&'static str> = phf_set! {
     "Damage",
     "Efficiency",
     "FilterType",
+    "FreeSlots",
     "Growth",
     "HarvestedHash",
     "Health",
@@ -520,6 +523,7 @@ pub(crate) const SLOT_LOGIC_TYPES: phf::Set<&'static str> = phf_set! {
     "SeedingRatio",
     "SortingClass",
     "Temperature",
+    "TotalSlots",
     "Volume",
 };
 
@@ -837,7 +841,8 @@ pub(crate) const LOGIC_TYPE_DOCS: phf::Map<&'static str, &'static str> = phf_map
     "ChartedNavPoints" => "The number of charted NavPoints at the rocket's target Space Map Location.",
     "ClearMemory" => "When set to 1, clears the counter memory (e.g. ExportCount). Will set itself back to 0 when actioned",
     "CollectableGoods" => "Gets the cost of fuel to return the rocket to your current world.",
-    "Color" => "Whether driven by concerns for clarity, safety or simple aesthetics, Stationeers have access to a small rainbow of colors for their constructions. These are the color setting for devices, represented as an integer.
+    "Color" => "
+        Whether driven by concerns for clarity, safety or simple aesthetics, Stationeers have access to a small rainbow of colors for their constructions. These are the color setting for devices, represented as an integer.
 
 0: Blue
 1: Grey
@@ -852,7 +857,8 @@ pub(crate) const LOGIC_TYPE_DOCS: phf::Map<&'static str, &'static str> = phf_map
 10: Pink
 11: Purple
 
-It is an unwavering universal law that anything higher than 11 will be purple. The ODA is powerless to change this. Similarly, anything lower than 0 will be Blue.",
+        It is an unwavering universal law that anything higher than 11 will be purple. The ODA is powerless to change this. Similarly, anything lower than 0 will be Blue.
+      ",
     "Combustion" => "The assess atmosphere is on fire. Returns 1 if atmosphere is on fire, 0 if not.",
     "CombustionInput" => "The assess atmosphere is on fire. Returns 1 if device's input network is on fire, 0 if not.",
     "CombustionInput2" => "The assess atmosphere is on fire. Returns 1 if device's Input2 network is on fire, 0 if not.",
@@ -860,6 +866,7 @@ It is an unwavering universal law that anything higher than 11 will be purple. T
     "CombustionOutput" => "The assess atmosphere is on fire. Returns 1 if device's Output network is on fire, 0 if not.",
     "CombustionOutput2" => "The assess atmosphere is on fire. Returns 1 if device's Output2 network is on fire, 0 if not.",
     "CompletionRatio" => "How complete the current production is for this device, between 0 and 1",
+    "ContactSlotIndex" => "The index of the slot in which the trader has spawned. This defines the class of the trader i.e. Utility, Small, Medium etc.",
     "ContactTypeId" => "The type id of the contact.",
     "CurrentCode" => "The Space Map Address of the rockets current Space Map Location",
     "CurrentResearchPodType" => "",
@@ -918,6 +925,7 @@ It is an unwavering universal law that anything higher than 11 will be purple. T
     "NavPoints" => "The number of NavPoints at the rocket's target Space Map Location.",
     "NetworkFault" => "Attached network is experiencing a fault, such as a pipe burst or other failure.",
     "NextWeatherEventTime" => "Returns in seconds when the next weather event is inbound.",
+    "NextWeatherHash" => "NextWeatherHash provides the hash value for the name of the next weather event as a 32 bit integer.",
     "None" => "No description",
     "On" => "The current state of the device, 0 for off, 1 for on",
     "Open" => "1 if device is open, otherwise 0",
@@ -1115,6 +1123,7 @@ pub(crate) const SLOT_TYPE_DOCS: phf::Map<&'static str, &'static str> = phf_map!
     "Damage" => "returns the damage state of the item in the slot",
     "Efficiency" => "returns the growth efficiency of the plant in the slot",
     "FilterType" => "No description available",
+    "FreeSlots" => "The number of free slots available in this object.",
     "Growth" => "returns the current growth state of the plant in the slot",
     "HarvestedHash" => "No description available",
     "Health" => "Returns the health of the plant in the slot",
@@ -1139,6 +1148,7 @@ pub(crate) const SLOT_TYPE_DOCS: phf::Map<&'static str, &'static str> = phf_map!
     "SeedingRatio" => "How far the plant is towards seeding represented as a fraction between 0 and 1, with 1 being seeding and will supply seeds when harvested.",
     "SortingClass" => "No description available",
     "Temperature" => "returns temperature of the slot occupants internal atmosphere",
+    "TotalSlots" => "The total number of slots available in this object.",
     "Volume" => "No description available",
 };
 

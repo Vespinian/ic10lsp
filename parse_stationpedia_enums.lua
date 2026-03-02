@@ -65,7 +65,7 @@ file = io.open("generated/slotlogictypesdocs.rs", "w")
 if file == nil then
 	return
 end
-content_mod = string.gsub(content, "\r", "\n"):gsub("%<[^>]*.", "")
+content_mod = string.gsub(content, "\r", "\n")
 file:write(content_mod)
 file:close()
 
