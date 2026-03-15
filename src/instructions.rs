@@ -30,16 +30,19 @@ const DEVICE: Union = Union(
     "device",
 );
 const ID: Union = Union(&[DataType::Register, DataType::Id, DataType::Number], "id");
-const VALUE: Union = Union(&[DataType::Register, DataType::Number], "value");
+const VALUE: Union = Union(
+    &[DataType::Register, DataType::Id, DataType::Number],
+    "value",
+);
 const ALIAS: Union = Union(&[DataType::Register, DataType::Device], "");
 const INT: Union = Union(&[DataType::Register, DataType::Number], "int");
 const NAME_HASH: Union = Union(&[DataType::Register, DataType::Number], "nameHash");
 const REAGENT_HASH: Union = Union(&[DataType::Register, DataType::Number], "reagentHash");
 const DEVICE_HASH: Union = Union(&[DataType::Register, DataType::Number], "deviceHash");
-const A_VALUE: Union = Union(&[DataType::Register, DataType::Number], "a");
-const B_VALUE: Union = Union(&[DataType::Register, DataType::Number], "b");
-const C_VALUE: Union = Union(&[DataType::Register, DataType::Number], "c");
-const D_VALUE: Union = Union(&[DataType::Register, DataType::Number], "d");
+const A_VALUE: Union = Union(&[DataType::Register, DataType::Id, DataType::Number], "a");
+const B_VALUE: Union = Union(&[DataType::Register, DataType::Id, DataType::Number], "b");
+const C_VALUE: Union = Union(&[DataType::Register, DataType::Id, DataType::Number], "c");
+const D_VALUE: Union = Union(&[DataType::Register, DataType::Id, DataType::Number], "d");
 const SLOT_INDEX: Union = Union(&[DataType::Register, DataType::Number], "slotIndex");
 const ADDRESS: Union = Union(&[DataType::Register, DataType::Number], "address");
 const LOGIC_TYPE: Union = Union(&[DataType::LogicType], "logicType");

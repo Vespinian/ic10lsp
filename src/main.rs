@@ -1447,9 +1447,7 @@ impl Backend {
                             if parameter.match_type(DataType::Name) {
                                 instructions::Union(&[DataType::Name], "")
                             } else if type_data.defines.contains_key(ident) {
-                                instructions::Union(&[DataType::Number], "")
-                                // if rocketwerks fixes the define bug with ids switch to this line
-                                // instructions::Union(&[DataType::Number, DataType::Id], "")
+                                instructions::Union(&[DataType::Number, DataType::Id], "")
                             } else if type_data.labels.contains_key(ident) {
                                 instructions::Union(&[DataType::Number], "")
                             } else if let Some(type_data) = type_data.aliases.get(ident) {
