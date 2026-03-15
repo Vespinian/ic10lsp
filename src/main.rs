@@ -95,33 +95,38 @@ impl From<String> for AliasValue {
 }
 
 trait HasType {
-    fn get_type(&self) -> instructions::DataType;
+    fn get_type(&self) -> &instructions::Union<'_>;
 }
 
 impl HasType for AliasValue {
-    fn get_type(&self) -> instructions::DataType {
+    fn get_type(&self) -> &instructions::Union<'_> {
         match *self {
-            AliasValue::Register(_) => instructions::DataType::Register,
-            AliasValue::Device(_) => instructions::DataType::Device,
+            AliasValue::Register(_) => {
+                &instructions::Union(&[instructions::DataType::Register], "")
+            }
+            AliasValue::Device(_) => &instructions::Union(&[instructions::DataType::Device], ""),
         }
     }
 }
 
 impl HasType for DefinitionData<f64> {
-    fn get_type(&self) -> instructions::DataType {
-        instructions::DataType::Number
+    fn get_type(&self) -> &instructions::Union<'_> {
+        &instructions::Union(&[instructions::DataType::Number], "")
     }
 }
 
 impl HasType for DefinitionData<String> {
-    fn get_type(&self) -> instructions::DataType {
-        instructions::DataType::Number
+    fn get_type(&self) -> &instructions::Union<'_> {
+        &instructions::Union(
+            &[instructions::DataType::Number, instructions::DataType::Id],
+            "",
+        )
     }
 }
 
 impl HasType for DefinitionData<u8> {
-    fn get_type(&self) -> instructions::DataType {
-        instructions::DataType::Number
+    fn get_type(&self) -> &instructions::Union<'_> {
+        &instructions::Union(&[instructions::DataType::Number], "")
     }
 }
 
@@ -129,7 +134,7 @@ impl<T> HasType for DefinitionData<T>
 where
     T: HasType,
 {
-    fn get_type(&self) -> instructions::DataType {
+    fn get_type(&self) -> &instructions::Union<'_> {
         self.value.get_type()
     }
 }
@@ -625,7 +630,8 @@ impl LanguageServer for Backend {
             let start_entries = completions.len();
             for (identifier, value_data) in map.iter() {
                 let value = &value_data.value;
-                if identifier.starts_with(prefix) && param_type.match_type(value_data.get_type()) {
+                if identifier.starts_with(prefix) && param_type.match_union(&value_data.get_type())
+                {
                     completions.push(CompletionItem {
                         label: identifier.to_string(),
                         label_details: Some(CompletionItemLabelDetails {
