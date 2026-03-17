@@ -178,7 +178,7 @@ impl Default for Configuration {
     fn default() -> Self {
         Self {
             max_lines: 128,
-            max_columns: 52,
+            max_columns: 90,
             warn_overline_comment: true,
             warn_overcolumn_comment: false,
         }
