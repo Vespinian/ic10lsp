@@ -13,6 +13,7 @@
 -1052087580 DynamicWorkCone
 -1055451111 ItemGasFilterOxygenInfinite
 -1056029600 ItemEmergencyArcWelder
+-105637991 ItemPureIceLiquidHydrochloricAcid
 -1057658015 ItemWheat
 -1061194321 StructureRocketFiltrationGas
 -1061510408 ItemEmergencyPickaxe
@@ -27,6 +28,7 @@
 -1075017031 StructureCompositeTubeWallFlat2ToFlat
 -1076892658 ItemCookedMushroom
 -1081797501 StructureShowerPowered
+-1083876169 ItemGasFilterAlcoholL
 -1088008720 StructureStairs4x2Rails
 -1093860567 StructureMediumRocketGasFuelTank
 -1094868323 AppliancePlantGeneticSplicer
@@ -51,6 +53,7 @@
 -1141760613 StructureMediumRadiatorLiquid
 -1144223677 ItemKitFuselageTypeC
 -1146760430 StructurePictureFrameThinMountLandscapeLarge
+-1149758986 ItemPureIceLiquidAlcohol
 -1149857558 StructureBackPressureRegulator
 -1150448260 ItemPureIceOxygen
 -1152751269 ItemLiquidVacuum
@@ -63,18 +66,19 @@
 -1161662836 StructureWallFlatCornerTriangleFlat
 -1166461357 ItemKitPipeLiquid
 -1168199498 ItemKitFridgeBig
+-1168649895 ItemGasFilterAlcohol
 -1169014183 StructureMediumConvectionRadiatorLiquid
 -1174735962 ItemSoundCartridgeLeads
 -1175477382 DynamicChannelizer
 -1176140051 ItemSensorLenses
 -1177469307 StructureWallVent
--1179273085 StructureSecurityCameraRight
 -1181922382 ItemKitElectronicsPrinter
 -1182923101 StructureInteriorDoorTriangle
 -1183969663 StructureInLineTankLiquid1x2
 -1185552595 ItemCannedRicePudding
 -1193543727 ItemHydroponicTray
 -1194323534 CompositeWallRoundedCorner1
+-1194453458 ItemGasFilterSilanolL
 -1196981113 StructureCableStraightBurnt
 -1198702771 ItemRocketScanningHead
 -1199245159 StructureCableSuperHeavyCorner4Burnt
@@ -93,6 +97,7 @@
 -1240951678 StructureFrameIron
 -1241256797 ItemKitBeds
 -1241851179 ItemKitConsole
+-1242799469 ItemGasFilterOzoneInfinite
 -124308857 StructureLogicReagentReader
 -1243329828 StructureWallPaddingArchVent
 -1245724402 StructureChairThickDouble
@@ -112,7 +117,9 @@
 -1290755415 SeedBag_Corn
 -1300059018 StructureSleeperVertical
 -1301215609 ItemIronIngot
+-1302495450 ItemGasFilterHeliumL
 -1303038067 AppliancePlantGeneticAnalyzer
+-1305100708 ItemGasFilterHydrogenM
 -1306016444 ItemHardHat
 -1306415132 StructureWallLightBattery
 -1306628937 ItemPureIceLiquidVolatiles
@@ -143,9 +150,9 @@
 -1392622903 ItemWatermelon
 -1394008073 ItemKitChairs
 -1397583760 ItemPassiveVentInsulated
+-1399038877 StructureFiltrationLiquid
 -1399920604 ModularDeviceMeter3x3
 -1404690610 StructureCableJunction6
--1404964117 CircuitboardCameraDisplayModSCAN
 -1405295588 StructurePipeCrossJunction
 -1406385572 ItemNickelIngot
 -1407480603 StructureWallSmallPanelsOpen
@@ -181,7 +188,6 @@
 -1496094388 StructureConsoleCornerInner1Center
 -1499471529 ItemNitrice
 -1505147578 StructureInsulatedPipeCrossJunction5
--1505930464 ItemKitCCTV
 -1510009608 StructureChairThickSingle
 -1513030150 StructureCompositeCladdingAngled
 -1514298582 Landingpad_ThreshholdPiece
@@ -205,6 +211,7 @@
 -155945899 StructureWallPaddedCorner
 -156109268 StructureCrewModuleChair
 -1567752627 ItemWallCooler
+-1570814587 ItemGasFilterSaltInfinite
 -1577831321 StructureRefrigeratedVendingMachine
 -158007629 ItemSprayCanOrange
 -1585956426 ItemKitCrateMkII
@@ -280,7 +287,6 @@
 -1758710260 StructureGrowLight
 -1761465786 CompositeWallRoundedPlate
 -1766301997 ItemPipeVolumePump
--1768732546 CartridgeOreScanner
 -177220914 StructureCableCornerBurnt
 -1773192190 ItemReusableFireExtinguisher
 -1773490349 StructureCableSuperHeavyStraight3Burnt
@@ -305,12 +311,12 @@
 -1808154199 StructureManualHatch
 -1808376107 StructureConsoleFlatCornerInnerDouble
 -1812330717 StructureSleeperRight
+-1814438175 ItemGasFilterHydrazine
 -1814939203 StructureGasUmbilicalMale
 -1818718810 StructureRoboticArmDock
 -1821571150 ItemKitStirlingEngine
 -1826529455 StructurePipeLiquidStraight5
 -1826855889 ItemKitWall
--1831475049 CircuitboardCameraDisplayModSD
 -1831558953 ItemKitInsulatedPipeUtilityLiquid
 -1841632400 StructureHydroponicsTrayData
 -1841871763 StructureCompositeCladdingAngledCornerInner
@@ -342,6 +348,7 @@
 -1885560197 CompositeWallRoundedCornerPanel1
 -1886261558 ItemWrench
 -1888248335 StructureHydraulicPipeBender
+-1893762886 ItemGasFilterHeliumInfinite
 -1897221677 StructureSmallTableBacklessSingle
 -1897868623 ItemStelliteIngot
 -1898247915 RailingElegant02
@@ -370,6 +377,7 @@
 -1943134693 ItemDuctTape
 -1949054743 StructureConsoleLED1x3
 -1958705204 PortableComposter
+-1959236530 ItemGasFilterSaltM
 -1963016580 StructureWallArchCornerSquare
 -196483074 CompositeWallRoundedBaseCap1
 -1965275716 StructureFuselageDoorsDual
@@ -379,11 +387,13 @@
 -1971419310 ItemSoundCartridgeSynth
 -1976947556 CardboardBox
 -1981101032 ItemSecurityCamera
+-1983982543 ItemGasFilterSalt
 -1990600883 SeedBag_Fern
 -1991620751 StructureCompositeTubeWindow2Inner
 -1993197973 ItemGasFilterWater
 -2006384159 StructurePipeLiquidCrossJunction5
 -2008706143 StructurePressurePlateLarge
+-2015427374 ItemGasFilterHydrogen
 -2015578902 StuctureCompositeWindowRoundedBaseCap2
 -2015613246 ItemMKIIScrewdriver
 -2020231820 StructureStacker
@@ -391,6 +401,7 @@
 -2025519844 StructureLiquidTankSmallInsulatedInLine
 -2028449761 ModularDeviceComputer
 -2031440019 StructurePumpedLiquidEngine
+-2035015214 ItemGasFilterHClInfinite
 -2038384332 ItemKitVendingMachine
 -2038663432 ItemStelliteGlassSheets
 -2038889137 ItemKitMusicMachines
@@ -448,6 +459,7 @@
 -2131782367 StructureRobotArmDoor
 -2138748650 StructureSmallSatelliteDish
 -2140672772 ItemKitGroundTelescope
+-2141998355 ItemPureIceHydrochloricAcid
 -214232602 StructureGovernedGasEngine
 -21970188 DynamicLight
 -219886810 StructureCompositeTubeRing
@@ -472,6 +484,7 @@
 -265202332 StructureRoboticArmRailScrewRight
 -267108827 StructureRoboticArmRailInnerCorner
 -27284803 ItemKitInsulatedPipeUtility
+-283214125 ItemGasFilterHelium
 -287495560 StructureLiquidPipeHeater
 -290196476 ItemSiliconIngot
 -291862981 StructureSmallTableThickSingle
@@ -596,6 +609,7 @@
 -624011170 StructurePressureFedGasEngine
 -626563514 StructureComputer
 -628145954 StructureCableJunction6Burnt
+-62956328 ItemGasFilterSaltL
 -631590668 StructureCableFuse5k
 -632657357 ItemGasFilterNitrogenM
 -633100 CompositeWallRoundedCornerPanel4
@@ -626,6 +640,7 @@
 -69685069 StructureCompositeCladdingAngledCorner
 -707307845 ItemCopperOre
 -709086714 ItemCookedTomato
+-715871366 ItemGasFilterHCl
 -721824748 ItemGasFilterOxygen
 -722284333 StructureConsoleDual
 -72748982 StructureInsulatedPipeLiquidCrossJunction6
@@ -668,7 +683,7 @@
 -806329766 CompositeWallRoundedTubeWallPanel1
 -806743925 ItemKitFurnace
 -806986392 MotherboardRockets
--80971932 StructureSecurityCameraPanning
+-808900936 ItemGasFilterSilanolM
 -810874728 StructureChuteDigitalFlipFlopSplitterLeft
 -813426145 StructureInsulatedInLineTankLiquid1x1
 -815193061 StructureConsoleLED5
@@ -720,6 +735,7 @@
 -929742000 ItemSilverIngot
 -932136011 CartridgeConfiguration
 -932335800 ItemKitRocketTransformerSmall
+-933073887 ItemGasFilterAlcoholM
 -934345724 StructureSolarPanelReinforced
 -940470326 ItemKitLarreDockBypass
 -945806652 ItemKitElevator
@@ -739,13 +755,14 @@
 -981621061 StructureCompositeTubeWall2OuterToOuterCap
 -982648328 StructureCompositeTubeWallFlat
 -983091249 ItemCobaltOre
+-983937104 ItemGasFilterHeliumM
+-986542390 ItemGasFilterHydrogenL
 -988382953 StructureLargeRocketGasFuelTank
 -98995857 ItemKitArcFurnace
 -99091572 ItemKitPressureFedLiquidEngine
 -998592080 ItemTomato
 -999714082 ItemCannedEdamame
 -999721119 StructurePipeLabel
-1004741389 CircuitboardCameraDisplayModHD
 1005397063 ItemKitLogicTransmitter
 1005491513 StructureIgniter
 1005571172 SeedBag_Potato
@@ -776,11 +793,13 @@
 1058398766 CompositeWallRoundedBase
 1058547521 ItemConstantanIngot
 1061164284 StructureInsulatedPipeCrossJunction6
+1066654742 ItemGasFilterHydrazineInfinite
 106953348 DynamicSkeleton
 1070143159 Landingpad_CenterPiece01
 1070427573 StructureHorizontalAutoMiner
 1070499908 ModularDeviceSlider
 107125142 ModularDeviceLabelPlate3x3
+1071590510 ItemPureIceSilanol
 1072914031 ItemDynamicAirCon
 1073631646 ItemMarineHelmet
 1075006542 StructureCableSuperHeavyStraight5Burnt
@@ -795,6 +814,7 @@
 1101296153 Landingpad_CrossPiece
 1101328282 CartridgePlantAnalyser
 110184667 StructureCompositeCladdingRoundedCornerInner
+1103525139 StructureFermenter
 1103972403 ItemSiliconOre
 1108423476 ItemWallLight
 1112047202 StructureCableJunction4
@@ -817,6 +837,7 @@
 1171987947 StructureWallPaddedArchLightFittingTop
 1172114950 StructureShelf
 1174360780 ApplianceDeskLampRight
+1177985605 ItemGasFilterPollutedWaterL
 1181371795 ItemKitRegulator
 1182412869 ItemKitCompositeFloorGrating
 1182510648 StructureWallArchPlating
@@ -833,6 +854,7 @@
 1220870319 StructureLiquidUmbilicalFemaleSide
 1222286371 ItemKitAtmospherics
 1224819963 ItemChemLightYellow
+1225192790 ItemPureIceHydrazine
 1225836666 ItemIronFrames
 1226329381 StructureConsoleFlat1
 1228430734 StructureConsoleFlat3x2Double
@@ -850,6 +872,7 @@
 1260918085 ApplianceReagentProcessor
 126725031 ItemBurger
 1269458680 StructurePressurePlateMedium
+1274165821 ItemPureIceLiquidOzone
 1277828144 ItemPumpkin
 1277979876 ItemPumpkinSoup
 1281911841 StructureWallArchCornerTriangle
@@ -858,6 +881,7 @@
 1289581593 StructurePipeOneWayValveLever
 1289723966 ItemSprayGun
 1293995736 ItemKitSolidGenerator
+1294338082 ItemPureIceLiquidSodiumChloride
 1298920475 StructureAccessBridge
 1305252611 StructurePipeOrgan
 1307165496 StructureElectronicsPrinter
@@ -874,6 +898,7 @@
 1344257263 ItemSprayCanPink
 1344368806 CircuitboardGraphDisplay
 1344773148 ItemCookedCorn
+1349930181 ItemGasFilterPollutedWater
 1353449022 ItemCookedSoybean
 1360330136 StructureChuteCorner
 1362766792 StructureConsole2x2
@@ -971,7 +996,6 @@
 159886536 ItemKitWaterBottleFiller
 1602758612 StructureWallGeometryT
 1603046970 ItemKitElectricUmbilical
-1603266057 CircuitboardCameraDisplayModLD
 1605130615 Lander
 1606989119 CartridgeNetworkAnalyser
 1618019559 CircuitboardAirControl
@@ -1012,7 +1036,6 @@
 1700018136 ToolPrinterMod
 1701593300 StructureCableJunctionH5Burnt
 1701764190 ItemKitFlagODA
-170530149 StructureSecurityCameraStraight
 170818567 Landingpad_GasCylinderTankPiece
 1708439824 MotherboardMap
 170878959 ItemKitStairs
@@ -1034,8 +1057,6 @@
 1750375230 StructureBench4
 1751355139 StructureCompositeCladdingSphericalCorner
 1753647154 ItemKitRocketScanner
-1755382369 CartridgeCCTV
-1757433570 StructureSecurityCameraLeft
 1757673317 ItemAreaPowerControl
 1758427767 ItemIronOre
 1762436433 StructureCompositeTubeWallFlat2ToFlatConnectorRight
@@ -1045,16 +1066,19 @@
 1773255945 ModularDeviceFlipSwitch
 1773872556 ItemKitPressureFedLiquidEngineHeavy
 1774183959 ItemKitPressureFedGasEngineHeavy
+1779488235 ItemGasFilterSilanolInfinite
 1779979754 ItemKitWindowShutter
 1781051034 StructureRocketManufactory
 1783004244 SeedBag_Soybean
 178422810 ItemKitSatelliteDish
 178472613 StructureRocketEngineTiny
+1785339433 ItemGasFilterHClM
 1791306431 ItemEmergencyEvaSuit
 1794588890 StructureWallArchCornerRound
 179694804 StructureWallPaddedNoBorderCorner
 1800622698 ItemCoffeeMug
 1800701885 StructureRoboticArmRailStraightStop
+180397053 ItemPureIceOzone
 1804482074 CompositeWallTubeCap2
 1807979822 StructureCompositeTubeWall3ToFlat
 1811979158 StructureAngledBench
@@ -1131,7 +1155,6 @@
 195298587 StructureExpansionValve
 195442047 ItemCableFuse
 1957571043 StructureChuteExportBin
-1957693996 StructureSecurityCameraFishEye
 19591354 StructureVendingMachineSmall
 1959564765 ItemGasFilterPollutantsL
 1960952220 ItemKitSmallSatelliteDish
@@ -1145,6 +1168,7 @@
 1981698201 StructureInteriorDoorPaddedThin
 1986658780 StructureWaterBottleFillerPoweredBottom
 1990225489 ItemKitComputer
+1996342730 ItemGasFilterOzoneM
 1997212478 StructureWeatherStation
 1997293610 ItemKitLogicInputOutput
 1997436771 StructureCompositeCladdingPanel
@@ -1164,6 +1188,7 @@
 2014473306 StructureCableSuperHeavyCorner4
 2015129381 ModularDeviceSliderDiode1
 2015439334 ItemKitPoweredVent
+2019231452 ItemGasFilterHydrogenInfinite
 2020180320 CircuitboardSolarControl
 2024754523 StructurePipeRadiatorFlatLiquid
 2024882687 StructureWallPaddingLightFitting
@@ -1184,17 +1209,20 @@
 205916793 ItemEmergencySpaceHelmet
 2060134443 ItemCableCoilHeavy
 2060648791 StructureElevatorLevelIndustrial
+2063001862 ItemGasFilterHydrazineL
 2066977095 StructurePassiveLargeRadiatorGas
 2067655311 ItemKitInsulatedLiquidPipe
 206848766 ItemKitGovernedGasRocketEngine
 2072805863 StructureLiquidPipeRadiator
 2077593121 StructureLogicHashGen
 2079959157 AccessCardWhite
+2080892575 ItemGasFilterPollutedWaterInfinite
 2085378178 StructureCompositeTubeWallFlat2ToFlatConnector2
 2085762089 StructureCableStraightHBurnt
 2087628940 StructureWallPaddedWindow
 2088517573 ModularDeviceEmergencyButton3x3
 2093095541 StructureInsulatedPipeLiquidStraight5
+2094616925 ItemGasFilterSilanol
 2096189278 StructureLogicMirror
 2097419366 StructureWallFlatCornerTriangle
 209854039 StructurePressureRegulator
@@ -1206,6 +1234,7 @@
 2109695912 StructureCompositeFloorGratingOpen
 2109945337 ItemRocketMiningDrillHead
 2111910840 ItemSugar
+2113311218 ItemPureIceLiquidSilanol
 2116552372 ItemGrass
 212919006 StructureCompositeCladdingCylindrical
 2130739600 DynamicMKIILiquidCanisterEmpty
@@ -1223,10 +1252,12 @@
 226410516 ItemGoldIngot
 23052817 StructurePressurantValve
 231903234 KitStructureCombustionCentrifuge
+233953680 ItemGasFilterHydrazineM
 234601764 ItemChocolateBar
 235361649 ItemExplosive
 235638270 StructureConsole
 237296774 StructureCompositeTubeWindow4
+237370867 ItemKitLiquidFiltration
 238631271 ItemPassiveVent
 2393826 StructureCableCorner3HBurnt
 240174650 ItemMKIIAngleGrinder
@@ -1238,6 +1269,7 @@
 252561409 ItemCharcoal
 255034731 StructureSuitStorage
 258339687 ItemCorn
+259902657 ItemOreDetector
 26167457 StructureWallPlating
 262616717 StructurePipeLiquidTJunction
 264413729 StructureLogicBatchReader
@@ -1266,6 +1298,7 @@
 324868581 StructureCompositeFloorGrating
 326752036 ItemKitSleeper
 328450349 StructureCompositeTubeWallFlatConnector2
+33224028 ItemGasFilterOzoneL
 335498166 StructurePassiveVent
 336213101 StructureAutolathe
 337035771 AccessCardKhaki
@@ -1335,6 +1368,7 @@
 489382030 ModularDeviceRoundButton
 489494578 ItemKitLadder
 491845673 StructureLogicButton
+493694655 ItemGasFilterHClL
 495305053 ItemRTG
 496830914 ItemKitAIMeE
 498481505 ItemSprayCanWhite
@@ -1361,6 +1395,7 @@
 546002924 StructureLogicRocketUplink
 554524804 StructureLogicDial
 555215790 StructureLightLongWide
+555924824 ItemPureIceLiquidHydrazine
 55811590 StructureConsoleBaseCorner1
 562723635 StructureInsulatedInLineTankLiquid1x3
 567885832 CompositeWallRoundedCorner2
@@ -1374,6 +1409,7 @@
 600133846 StructureCompositeFloorGrating4
 605357050 StructureCableStraight
 611181283 ItemKitWaterPurifier
+614684976 ItemGasFilterAlcoholInfinite
 617773453 ItemKitLiquidTankInsulated
 619828719 StructureWallSmallPanelsAndHatch
 62768076 ItemPumpkinPie
@@ -1420,6 +1456,7 @@
 77421200 ItemKitDockingPort
 777684475 ItemLiquidCanisterSmart
 782529714 StructureWallArchTwoTone
+787360299 ItemGasFilterOzone
 789015045 ItemAuthoringTool
 790405182 StructureCompositeTubeWall2Inner
 791407452 StructureCompositeWindowShutterConnector
@@ -1436,6 +1473,7 @@
 814674910 StructureCompositeTubeWall2ToFlatConnectorRight
 81488783 CartridgeTracker
 817945707 Landingpad_GasConnectorInwardPiece
+825332435 ItemGasFilterPollutedWaterM
 826144419 StructureElevatorShaft
 836893478 StructureCompositeTubeWall2OuterToFlat2
 839890807 StructureFlatBench
